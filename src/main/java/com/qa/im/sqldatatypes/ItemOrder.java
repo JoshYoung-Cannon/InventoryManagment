@@ -1,6 +1,6 @@
-package com.qa.inventorymanagement;
+package com.qa.im.sqldatatypes;
 
-public class itemOrder {
+public class ItemOrder {
 	private long id;
 	private long itemID;
 	private long orderID;
@@ -14,21 +14,21 @@ public class itemOrder {
 	 * @param quantity
 	 */
 	
-	public itemOrder(long itemID, long orderID, long quantity) {
+	public ItemOrder(long itemID, long orderID, long quantity) {
 		super();
 		this.itemID = itemID;
 		this.orderID = orderID;
 		this.quantity = quantity;
 	}
 
-	public itemOrder(long itemID, long orderID) {
+	public ItemOrder(long itemID, long orderID) {
 		super();
 		this.itemID = itemID;
 		this.orderID = orderID;
 		this.quantity = 0;
 	}
 
-	public itemOrder() {
+	public ItemOrder() {
 		super();
 	}
 

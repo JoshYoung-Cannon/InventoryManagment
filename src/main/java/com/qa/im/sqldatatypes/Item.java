@@ -1,4 +1,4 @@
-package com.qa.inventorymanagement;
+package com.qa.im.sqldatatypes;
 
 public class Item {
 	private long id;

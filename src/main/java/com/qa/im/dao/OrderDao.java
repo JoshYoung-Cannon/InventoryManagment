@@ -1,25 +1,27 @@
-package com.qa.inventorymanagement;
+package com.qa.im.dao;
 
 import java.util.ArrayList;
 
-public class ItemOrderDao implements Dao<itemOrder>{
+import com.qa.im.sqldatatypes.Order;
 
-	public void create(itemOrder r) {
+public class OrderDao implements Dao<Order>{
+
+	public void create(Order r) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public ArrayList<itemOrder> readAll() {
+	public ArrayList<Order> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ArrayList<itemOrder> readRecords(int id) {
+	public ArrayList<Order> readRecords(Order r) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void update(itemOrder r) {
+	public void update(Order r) {
 		// TODO Auto-generated method stub
 		
 	}

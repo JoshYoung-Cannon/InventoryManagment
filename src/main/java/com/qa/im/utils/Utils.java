@@ -1,4 +1,4 @@
-package com.qa.inventorymanagement;
+package com.qa.im.utils;
 
 import java.util.Scanner;
 

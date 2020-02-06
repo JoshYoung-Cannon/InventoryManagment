@@ -1,6 +1,8 @@
-package com.qa.inventorymanagement;
+package com.qa.im.dao;
 
 import java.util.ArrayList;
+
+import com.qa.im.sqldatatypes.Item;
 
 public class ItemDao implements Dao<Item> {
 
@@ -14,7 +16,7 @@ public class ItemDao implements Dao<Item> {
 		return null;
 	}
 
-	public ArrayList<Item> readRecords(int id) {
+	public ArrayList<Item> readRecords(Item r) {
 		// TODO Auto-generated method stub
 		return null;
 	}
