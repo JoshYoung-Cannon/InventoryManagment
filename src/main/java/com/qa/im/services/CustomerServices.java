@@ -34,9 +34,7 @@ public class CustomerServices {
 		/**
 		 * Updates a record in the Customer table
 		 */
-		// create customer instance
 		// get customer selection
-		// display and confirm selection
 		// enter modification
 		// update record
 	}
@@ -45,9 +43,8 @@ public class CustomerServices {
 		/**
 		 * Removes a record from the Customer table
 		 */
-		// create customer instance
 		// get customer selection
-		// display and confirm selection
+		// delete any connected order records
 		// delete record
 	}
 }
