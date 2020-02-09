@@ -11,7 +11,7 @@ public class ItemDao implements Dao<Item> {
 		
 	}
 
-	public ArrayList<Item> readAll() {
+	public ArrayList<Item> readAll(ArrayList<Item> r) {
 		// TODO Auto-generated method stub
 		return null;
 	}

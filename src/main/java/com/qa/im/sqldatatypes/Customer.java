@@ -1,7 +1,7 @@
 package com.qa.im.sqldatatypes;
 
 public class Customer {
-	private long id;
+	private int id;
 	private String forname;
 	private String surname;
 
@@ -11,6 +11,13 @@ public class Customer {
 	 * @param forname
 	 * @param surname
 	 */
+	
+	public Customer(int id, String forname, String surname) {
+		super();
+		this.id = id;
+		this.forname = forname;
+		this.surname = surname;
+	}
 	
 	public Customer(String forname, String surname) {
 		super();
@@ -22,11 +29,11 @@ public class Customer {
 		super();
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

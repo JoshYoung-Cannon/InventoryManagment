@@ -11,7 +11,7 @@ public class ItemOrderDao implements Dao<ItemOrder>{
 		
 	}
 
-	public ArrayList<ItemOrder> readAll() {
+	public ArrayList<ItemOrder> readAll(ArrayList<ItemOrder> r) {
 		// TODO Auto-generated method stub
 		return null;
 	}

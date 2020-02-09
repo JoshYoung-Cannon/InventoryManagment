@@ -6,8 +6,8 @@ public interface Dao<Record> {
 	//C
 	public void create(Record r);
 	//R
-	public ArrayList<Record> readAll();
-	public ArrayList<Record> readRecords(Record r);
+	public ArrayList<Record> readAll(ArrayList<Record> r);
+	public ArrayList<Record> readRecords(int rID);
 	//U
 	public void update(Record r);
 	//D

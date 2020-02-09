@@ -11,7 +11,7 @@ public class OrderDao implements Dao<Order>{
 		
 	}
 
-	public ArrayList<Order> readAll() {
+	public ArrayList<Order> readAll(ArrayList<Order> r) {
 		// TODO Auto-generated method stub
 		return null;
 	}
