@@ -16,6 +16,7 @@ public class CustomerServices {
 	private int firstNameMaxLength = 20, lastNameMaxLength = 30;
 
 	CustomerDao dao = new CustomerDao();
+
 	public void add() {
 		/**
 		 * Asks for the new Customers name and adds it to the Customers table
@@ -31,7 +32,6 @@ public class CustomerServices {
 		// add to database
 		dao.create(customer);
 		Runner.LOGGER.info("Added customer: " + lastName + ", " + firstName);
-		
 
 	}
 
@@ -59,7 +59,7 @@ public class CustomerServices {
 			Runner.LOGGER.info(i.getId() + ": " + i.getSurname() + ", " + i.getForname());
 		}
 	}
-	
+
 	public void update() {
 		/**
 		 * Updates a record in the Customer table

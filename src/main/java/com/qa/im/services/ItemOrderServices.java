@@ -25,7 +25,7 @@ public class ItemOrderServices {
 		// update quantity
 		// update order cost
 	}
-	public void deleteItemOrderFromOrders() {
+	public void deleteItemOrderByOrders() {
 		/**
 		 * delete any record with a given order id
 		 */
@@ -33,7 +33,7 @@ public class ItemOrderServices {
 		// store an array of appropriate itemOrder ids
 		// go through array removing records
 	}
-	public void deleteItemOrderFromItems() {
+	public void deleteItemOrderByItems() {
 		/**
 		 * delete any record with a given item id
 		 */
