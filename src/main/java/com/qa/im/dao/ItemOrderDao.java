@@ -11,12 +11,12 @@ public class ItemOrderDao implements Dao<ItemOrder>{
 		
 	}
 
-	public ArrayList<ItemOrder> readAll(ArrayList<ItemOrder> r) {
+	public ArrayList<ItemOrder> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ArrayList<ItemOrder> readRecords(ItemOrder r) {
+	public ArrayList<ItemOrder> readRecords(int rID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

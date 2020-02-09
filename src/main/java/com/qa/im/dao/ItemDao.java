@@ -11,12 +11,12 @@ public class ItemDao implements Dao<Item> {
 		
 	}
 
-	public ArrayList<Item> readAll(ArrayList<Item> r) {
+	public ArrayList<Item> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ArrayList<Item> readRecords(Item r) {
+	public ArrayList<Item> readRecords(int rID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

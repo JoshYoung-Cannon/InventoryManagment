@@ -1,8 +1,8 @@
 package com.qa.im.sqldatatypes;
 
 public class Order {
-	private long id;
-	private long customer_id;
+	private int id;
+	private int customer_id;
 	private double total;
 
 	/**
@@ -11,7 +11,7 @@ public class Order {
 	 * @param customer_id
 	 */
 	
-	public Order(long customer_id) {
+	public Order(int customer_id) {
 		super();
 		this.customer_id = customer_id;
 	}
@@ -20,19 +20,19 @@ public class Order {
 		super();
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public long getCustomer_id() {
+	public int getCustomer_id() {
 		return customer_id;
 	}
 
-	public void setCustomer_id(long customer_id) {
+	public void setCustomer_id(int customer_id) {
 		this.customer_id = customer_id;
 	}
 

@@ -19,8 +19,21 @@ public class Utils {
 		}
 		return strVal;
 	}
-	public static int intInput() {
+
+	public static int idInput() {
 		Scanner scanner = new Scanner(System.in);
-		return scanner.nextInt();
+		String temp = null;
+		int idVal = 0;
+		while (temp == null) {
+			temp = scanner.nextLine();
+			try {
+				idVal = Integer.parseInt(temp);
+			}
+			catch (Exception e) {
+				Runner.LOGGER.info("Please enter a valid ID value:");
+				temp = null;
+			}
+		}
+		return idVal;
 	}
 }

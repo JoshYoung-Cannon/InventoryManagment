@@ -24,8 +24,9 @@ public class CustomerDao implements Dao<Customer> {
 
 	}
 
-	public ArrayList<Customer> readAll(ArrayList<Customer> r) {
+	public ArrayList<Customer> readAll() {
 		// select * from customers;
+		ArrayList<Customer> customers = new ArrayList<Customer>();
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from customers");
@@ -33,13 +34,13 @@ public class CustomerDao implements Dao<Customer> {
 				int id = resultSet.getInt("id");
 				String fullName[] = resultSet.getString("customer_name").split(", ");
 				Customer customer = new Customer(id, fullName[1], fullName[0]);
-				r.add(customer);
+				customers.add(customer);
 			}
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not read Customers table");
 		}
 		// TODO Auto-generated method stub
-		return r;
+		return customers;
 	}
 
 	public ArrayList<Customer> readRecords(int rID) {
@@ -62,7 +63,13 @@ public class CustomerDao implements Dao<Customer> {
 
 	public void update(Customer r) {
 		// update customers set customer_name = "Updated name" where id = 1;
-
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("update customers set customer_name = '" + r.getSurname() + ", " + r.getForname() + "' where id = " + r.getId());
+			}
+		catch (Exception e) {
+			Runner.LOGGER.info("Error could not update Customer record");
+		}
 		// TODO Auto-generated method stub
 
 	}

@@ -1,10 +1,10 @@
 package com.qa.im.sqldatatypes;
 
 public class ItemOrder {
-	private long id;
-	private long itemID;
-	private long orderID;
-	private long quantity;
+	private int id;
+	private int itemID;
+	private int orderID;
+	private int quantity;
 
 	/**
 	 * This class contains all the variables needed for the item_orders table fields
@@ -14,14 +14,14 @@ public class ItemOrder {
 	 * @param quantity
 	 */
 	
-	public ItemOrder(long itemID, long orderID, long quantity) {
+	public ItemOrder(int itemID, int orderID, int quantity) {
 		super();
 		this.itemID = itemID;
 		this.orderID = orderID;
 		this.quantity = quantity;
 	}
 
-	public ItemOrder(long itemID, long orderID) {
+	public ItemOrder(int itemID, int orderID) {
 		super();
 		this.itemID = itemID;
 		this.orderID = orderID;
@@ -32,35 +32,35 @@ public class ItemOrder {
 		super();
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public long getItemID() {
+	public int getItemID() {
 		return itemID;
 	}
 
-	public void setItemID(long itemID) {
+	public void setItemID(int itemID) {
 		this.itemID = itemID;
 	}
 
-	public long getOrderID() {
+	public int getOrderID() {
 		return orderID;
 	}
 
-	public void setOrderID(long orderID) {
+	public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
 
-	public long getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(long quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 

@@ -42,7 +42,7 @@ public class CustomerServices {
 		// create customer arraylist
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		// populate arraylist
-		dao.readAll(customers);
+		customers = dao.readAll();
 		// print result
 		for (Customer i : customers) {
 			Runner.LOGGER.info(i.getId() + ": " + i.getSurname() + ", " + i.getForname());
@@ -64,9 +64,21 @@ public class CustomerServices {
 		/**
 		 * Updates a record in the Customer table
 		 */
-		// get customer selection
+		Customer customer = new Customer();
+		Runner.LOGGER.info("Please enter the ID of the Customer you want to update:");
+		customer.setId(Utils.idInput());
+		Runner.LOGGER.info("Update Customer: ");
+		findRecord(customer.getId());
 		// enter modification
+		Runner.LOGGER.info("Please enter a frist name:");
+		String firstName = Utils.strInput(firstNameMaxLength, NameTypes.FORENAME.getNameType());
+		Runner.LOGGER.info("Please enter a last name:");
+		String lastName = Utils.strInput(lastNameMaxLength, NameTypes.SURNAME.getNameType());
 		// update record
+		customer.setForname(firstName);
+		customer.setSurname(lastName);
+		dao.update(customer);
+		Runner.LOGGER.info("Updated customer: " + lastName + ", " + firstName);
 	}
 
 	public void delete() {

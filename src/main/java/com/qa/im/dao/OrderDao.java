@@ -11,12 +11,12 @@ public class OrderDao implements Dao<Order>{
 		
 	}
 
-	public ArrayList<Order> readAll(ArrayList<Order> r) {
+	public ArrayList<Order> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ArrayList<Order> readRecords(Order r) {
+	public ArrayList<Order> readRecords(int rID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
