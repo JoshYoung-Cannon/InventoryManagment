@@ -1,5 +1,9 @@
 package com.qa.im.services;
 
+import java.util.ArrayList;
+
+import com.qa.im.sqldatatypes.Order;
+
 public class OrderServices {
 	/**
 	 * Contains logic for: Calculate cost of Order Add Order View all Orders Delete
@@ -18,6 +22,14 @@ public class OrderServices {
 //		 populate listarray
 //		 print result
 
+	}
+	
+	public ArrayList<Order> findRecord(int recordID) {
+//		create order listarray
+//		create order instance
+//		get orders
+//		return orders
+		return null;
 	}
 
 	public void calculateCost() {
