@@ -32,6 +32,7 @@ public class OrderServices {
 		dao.create(order);
 		Runner.LOGGER.info("Order added");
 //		 add item to itemOrders and link to current order
+		
 	}
 
 	public void viewAll() {
