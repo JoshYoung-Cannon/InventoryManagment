@@ -36,8 +36,18 @@ public class OrderServices {
 
 	public void viewAll() {
 //		 create order listarray
+		ArrayList<Order> orders = new ArrayList<Order>();
 //		 populate listarray
+		orders = dao.readAll();
 //		 print result
+		if (orders.size() > 0) {
+			for (Order i : orders) {
+				Runner.LOGGER.info("Order: " + i.getId() + " Customer: " + i.getCustomer_id() + " Total: £" + i.getTotal());
+			}
+		}
+		else {
+			Runner.LOGGER.info("There are no Orders");
+		}
 
 	}
 

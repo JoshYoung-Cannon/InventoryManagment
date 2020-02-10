@@ -20,7 +20,7 @@ public class Runner {
 		Config.password = "1amGr00t";
 		CustomerServices cus = new CustomerServices();
 		OrderServices test = new OrderServices();
-		cus.viewAll();
-		test.add();
+		//cus.viewAll();
+		test.viewAll();
 	}
 }
