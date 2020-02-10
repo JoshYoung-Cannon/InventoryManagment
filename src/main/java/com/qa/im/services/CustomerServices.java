@@ -49,15 +49,23 @@ public class CustomerServices {
 		}
 	}
 
-	public void findRecord(int recordID) {
+	public boolean findRecord(int recordID) {
 		/**
 		 * Search for a record by ID
 		 */
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		customers = dao.readRecords(recordID);
-		for (Customer i : customers) {
-			Runner.LOGGER.info(i.getId() + ": " + i.getSurname() + ", " + i.getForname());
+		boolean customersFound = false;
+		if (customers.size() > 0) {
+			for (Customer i : customers) {
+				Runner.LOGGER.info(i.getId() + ": " + i.getSurname() + ", " + i.getForname());
+			}
+			customersFound = true;
 		}
+		else {
+			Runner.LOGGER.info("Could not find customer record with id: " + recordID);
+		}
+		return customersFound;
 	}
 
 	public void update() {
@@ -68,7 +76,11 @@ public class CustomerServices {
 		Runner.LOGGER.info("Please enter the ID of the Customer you want to update:");
 		customer.setId(Utils.idInput());
 		Runner.LOGGER.info("Update Customer: ");
-		findRecord(customer.getId());
+		while (findRecord(customer.getId()) == false) {
+			Runner.LOGGER.info("Please enter the ID of the Customer you want to update:");
+			customer.setId(Utils.idInput());
+			Runner.LOGGER.info("Update Customer: ");
+		}
 		// enter modification
 		Runner.LOGGER.info("Please enter a frist name:");
 		String firstName = Utils.strInput(firstNameMaxLength, NameTypes.FORENAME.getNameType());
@@ -86,7 +98,16 @@ public class CustomerServices {
 		 * Removes a record from the Customer table
 		 */
 		// get customer selection
+		Customer customer = new Customer();
+		Runner.LOGGER.info("Please enter the ID of the Customer you want to delete:");
+		customer.setId(Utils.idInput());
+		while (findRecord(customer.getId()) == false) {
+			Runner.LOGGER.info("Please enter the ID of the Customer you want to delete:");
+			customer.setId(Utils.idInput());
+		}
 		// delete any connected order records
 		// delete record
+		dao.delete(customer.getId());
+		Runner.LOGGER.info("Customer deleted");
 	}
 }

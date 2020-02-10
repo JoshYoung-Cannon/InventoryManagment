@@ -14,6 +14,14 @@ public class ItemOrder {
 	 * @param quantity
 	 */
 	
+	public ItemOrder(int id, int itemID, int orderID, int quantity) {
+		super();
+		this.id = id;
+		this.itemID = itemID;
+		this.orderID = orderID;
+		this.quantity = quantity;
+	}
+	
 	public ItemOrder(int itemID, int orderID, int quantity) {
 		super();
 		this.itemID = itemID;

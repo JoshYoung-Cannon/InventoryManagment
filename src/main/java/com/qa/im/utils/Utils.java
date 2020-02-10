@@ -36,4 +36,25 @@ public class Utils {
 		}
 		return idVal;
 	}
+	
+	public static double valueInput(double maxInputValue) {
+		Scanner scanner = new Scanner(System.in);
+		String temp = null;
+		double value = 0;
+		while (temp == null) {
+			temp = scanner.nextLine();
+			try {
+				value = Double.parseDouble(temp);
+				if (value > maxInputValue) {
+					Runner.LOGGER.info("Please enter a valid value (range: £0.00 - £" + maxInputValue + "):");
+					temp = null;
+				}
+			}
+			catch (Exception e) {
+				Runner.LOGGER.info("Please enter a valid value (range: £0.00 - £" + maxInputValue + "):");
+				temp = null;
+			}
+		}
+		return value;
+	}
 }

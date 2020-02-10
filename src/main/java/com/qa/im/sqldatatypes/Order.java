@@ -16,6 +16,13 @@ public class Order {
 		this.customer_id = customer_id;
 	}
 
+	public Order(int id, int customer_id, double total) {
+		super();
+		this.id = id;
+		this.customer_id = customer_id;
+		this.total = total;
+	}
+	
 	public Order() {
 		super();
 	}

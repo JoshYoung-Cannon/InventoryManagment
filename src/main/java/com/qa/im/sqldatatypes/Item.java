@@ -18,6 +18,13 @@ public class Item {
 		this.value = value;
 	}
 
+	public Item(int id, String name, double value) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.value = value;
+	}
+	
 	public Item() {
 		super();
 	}

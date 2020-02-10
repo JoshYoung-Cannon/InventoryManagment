@@ -75,8 +75,15 @@ public class CustomerDao implements Dao<Customer> {
 	}
 
 	public void delete(int id) {
+		//delete from customers where id = 1;
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("delete from customers where id = " + id);
+			}
+		catch (Exception e) {
+			Runner.LOGGER.info("Error could not delete Customer record");
+		}
 		// TODO Auto-generated method stub
-
 	}
 
 }
