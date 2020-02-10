@@ -43,10 +43,24 @@ public class OrderDao implements Dao<Order>{
 		// TODO Auto-generated method stub
 		return orders;
 	}
-
+	
 	public ArrayList<Order> readRecords(int rID) {
+		ArrayList<Order> orders = new ArrayList<Order>();
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery("select * from orders where customer_id = " + rID);
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				int customerID = resultSet.getInt("customer_id");
+				double total = resultSet.getDouble("total");
+				Order order = new Order(id, customerID, total);
+				orders.add(order);
+			}
+		} catch (Exception e) {
+			Runner.LOGGER.info("Error could not read Customers table");
+		}
 		// TODO Auto-generated method stub
-		return null;
+		return orders;
 	}
 
 	public void update(Order r) {

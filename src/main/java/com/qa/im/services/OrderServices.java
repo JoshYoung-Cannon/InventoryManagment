@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.qa.im.Runner;
 import com.qa.im.dao.OrderDao;
+import com.qa.im.sqldatatypes.Customer;
 import com.qa.im.sqldatatypes.Order;
 import com.qa.im.utils.Utils;
 
@@ -52,11 +53,22 @@ public class OrderServices {
 	}
 
 	public ArrayList<Order> findRecord(int recordID) {
+		/**
+		 * Find all orders linked to a specified Customer
+		 */
 //		create order listarray
-//		create order instance
+		ArrayList<Order> orders = new ArrayList<Order>();
 //		get orders
-//		return orders
-		return null;
+		orders = dao.readRecords(recordID);
+		if (orders.size() > 0) {
+			for (Order i : orders) {
+				Runner.LOGGER.info("Order: " + i.getId() + " Customer: " + i.getCustomer_id() + " Total: £" + i.getTotal());
+			}
+		}
+		else {
+			Runner.LOGGER.info("Could not find customer record with id: " + recordID);
+		}
+		return orders;
 	}
 
 	public void calculateCost() {

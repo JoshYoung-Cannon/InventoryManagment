@@ -16,11 +16,11 @@ public class Runner {
 //		Config.username = Utils.strInput(30, "Username (hint root)");
 //		LOGGER.info("Enter the inventory_db password:");
 //		Config.password = Utils.strInput(30, "Password");
-		Config.username = "root";
-		Config.password = "1amGr00t";
+
 		CustomerServices cus = new CustomerServices();
 		OrderServices test = new OrderServices();
-		//cus.viewAll();
 		test.viewAll();
+		LOGGER.info("");
+		test.findRecord(3);
 	}
 }
