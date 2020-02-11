@@ -19,6 +19,7 @@ public class CustomerDao implements Dao<Customer> {
 			statement.executeUpdate("insert into customers(customer_name) values('" + r.getSurname() + ", " + r.getForname() + "')");
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: " + r.getSurname() + ", " + r.getForname());
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 
@@ -38,6 +39,7 @@ public class CustomerDao implements Dao<Customer> {
 			}
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not read Customers table");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 		return customers;
@@ -56,6 +58,7 @@ public class CustomerDao implements Dao<Customer> {
 			}
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not read Customers table");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 		return customers;
@@ -69,6 +72,7 @@ public class CustomerDao implements Dao<Customer> {
 			}
 		catch (Exception e) {
 			Runner.LOGGER.info("Error could not update Customer record");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 
@@ -82,6 +86,7 @@ public class CustomerDao implements Dao<Customer> {
 			}
 		catch (Exception e) {
 			Runner.LOGGER.info("Error could not delete Customer record");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 	}
