@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.qa.im.Runner;
 import com.qa.im.dao.OrderDao;
+import com.qa.im.dao.OrderSearchTypes;
 import com.qa.im.sqldatatypes.Customer;
 import com.qa.im.sqldatatypes.Item;
 import com.qa.im.sqldatatypes.Order;
@@ -16,6 +17,7 @@ public class OrderServices {
 	 */
 	OrderDao dao = new OrderDao();
 	CustomerServices customerServices = new CustomerServices();
+	ItemOrderServices itemOrderServices = new ItemOrderServices();
 
 	public void add() {
 
@@ -27,13 +29,16 @@ public class OrderServices {
 			Runner.LOGGER.info("Please enter the Customer id you want to make an order for:");
 			customerID = Utils.idInput();
 		}
-//		 get at least 1 item id
 //		 add customer id to order
 		Order order = new Order(customerID);
 //		 add order to database
 		dao.create(order);
 		Runner.LOGGER.info("Order added");
-//		 add item to itemOrders and link to current order
+//		 get orders id
+		dao.setSearchID(OrderSearchTypes.TOTAL.getSearchType());
+		order = findRecord(0).get(0);
+//		 add a selected item to itemOrders and link to current order
+		itemOrderServices.addItemOrder(order.getId());
 	}
 
 	public void viewAll() {
@@ -90,7 +95,7 @@ public class OrderServices {
 		 */
 		// Get Order id
 		Order order = new Order();
-		dao.setSearchID("id");
+		dao.setSearchID(OrderSearchTypes.ORDER.getSearchType());
 		Runner.LOGGER.info("Please enter the ID of the order you want to delete:");
 		order.setId(Utils.idInput());
 		while (findRecord(order.getId()).size() <= 0) {

@@ -3,6 +3,7 @@ package com.qa.im;
 import org.apache.log4j.Logger;
 
 import com.qa.im.services.CustomerServices;
+import com.qa.im.services.ItemOrderServices;
 import com.qa.im.services.ItemServices;
 import com.qa.im.services.OrderServices;
 import com.qa.im.utils.Config;
@@ -17,13 +18,14 @@ public class Runner {
 //		LOGGER.info("Enter the inventory_db password:");
 //		Config.password = Utils.strInput(30, "Password");
 
-		Config.username = "root";
-		Config.password = "1amGr00t";
+
 		CustomerServices cus = new CustomerServices();
-		OrderServices test = new OrderServices();
-		test.viewAll();
-		LOGGER.info("");
-		test.deleteOrder();
-		test.viewAll();
+		ItemServices item = new ItemServices();
+		OrderServices ord = new OrderServices();
+		ItemOrderServices test = new ItemOrderServices();
+		cus.viewAll();
+		ord.viewAll();
+		item.viewAll();
+		ord.add();
 	}
 }

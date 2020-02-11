@@ -57,4 +57,25 @@ public class Utils {
 		}
 		return value;
 	}
+	
+	public static int quantityInput() {
+		Scanner scanner = new Scanner(System.in);
+		String temp = null;
+		int quantity = 0;
+		while (temp == null) {
+			temp = scanner.nextLine();
+			try {
+				quantity = Integer.parseInt(temp);
+				if (quantity == 0) {
+					Runner.LOGGER.info("Please enter a valid quantity value:");
+					temp = null;
+				}
+			}
+			catch (Exception e) {
+				Runner.LOGGER.info("Please enter a valid quantity value:");
+				temp = null;
+			}
+		}
+		return quantity;
+	}
 }
