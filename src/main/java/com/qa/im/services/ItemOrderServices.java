@@ -129,10 +129,18 @@ public class ItemOrderServices {
 		 * delete any record with a given id
 		 */
 		// get id
-		// store an array of appropriate itemOrder ids
-		// go through array removing records
+		ItemOrder itemOrder = new ItemOrder();
+		Runner.LOGGER.info("Please enter the ID of the Item Order you want to delete:");
+		itemOrder.setId(Utils.idInput());
+		dao.setSearchID(ItemOrderSearchTypes.ITEMORDER.getSearchType());
+		while (findRecord(itemOrder.getId()).isEmpty() == true) {
+			Runner.LOGGER.info("Please enter the ID of the Item Order you want to delete:");
+			itemOrder.setId(Utils.idInput());
+		}
+		dao.delete(itemOrder.getId());
 	}
-	public void deleteItemOrderByForiegnKey() {
+	
+	public void deleteItemOrderByForiegnKey(int foriegnID, ItemOrderSearchTypes fieldName) {
 		/**
 		 * delete any record with a given item/order id
 		 */
