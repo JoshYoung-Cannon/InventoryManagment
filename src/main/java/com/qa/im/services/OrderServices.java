@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.qa.im.Runner;
 import com.qa.im.dao.OrderDao;
 import com.qa.im.sqldatatypes.Customer;
+import com.qa.im.sqldatatypes.Item;
 import com.qa.im.sqldatatypes.Order;
 import com.qa.im.utils.Utils;
 
@@ -54,7 +55,8 @@ public class OrderServices {
 
 	public ArrayList<Order> findRecord(int recordID) {
 		/**
-		 * Find all orders linked to a specified Customer
+		 * Find all orders linked to a specified id
+		 * search id must be set with OrderDao.setSearchID() prior to calling this function
 		 */
 //		create order listarray
 		ArrayList<Order> orders = new ArrayList<Order>();
@@ -66,7 +68,7 @@ public class OrderServices {
 			}
 		}
 		else {
-			Runner.LOGGER.info("Could not find customer record with id: " + recordID);
+			Runner.LOGGER.info("Could not find " + dao.getSearchID() + ": " + recordID);
 		}
 		return orders;
 	}
@@ -86,6 +88,18 @@ public class OrderServices {
 		/**
 		 * Delete a record from the Orders table
 		 */
+		// Get Order id
+		Order order = new Order();
+		dao.setSearchID("id");
+		Runner.LOGGER.info("Please enter the ID of the order you want to delete:");
+		order.setId(Utils.idInput());
+		while (findRecord(order.getId()).size() <= 0) {
+			Runner.LOGGER.info("Please enter the ID of the order you want to delete:");
+			order.setId(Utils.idInput());
+		}
 		// Look through itemOrders and delete any dependent records
+		// Delete Order
+		dao.delete(order.getId());
+		Runner.LOGGER.info("Item deleted");
 	}
 }
