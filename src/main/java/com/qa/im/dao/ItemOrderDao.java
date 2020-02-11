@@ -96,6 +96,15 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	}
 
 	public void delete(int id) {
+		//delete from item_orders where id = 2
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("delete from item_orders where id = " + id);
+			}
+		catch (Exception e) {
+			Runner.LOGGER.info("Error could not delete Item Order record");
+			Runner.LOGGER.info(e);
+		}
 		// TODO Auto-generated method stub
 
 	}

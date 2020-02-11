@@ -26,7 +26,7 @@ public class Runner {
 		OrderServices ord = new OrderServices();
 		ItemOrderServices test = new ItemOrderServices();
 		test.viewAll();
-		test.updateQuantity();
+		test.deleteItemOrder();
 		test.viewAll();
 		
 		
