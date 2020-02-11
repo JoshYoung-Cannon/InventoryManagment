@@ -1,9 +1,12 @@
 package com.qa.im.services;
 
+import java.util.ArrayList;
+
 import com.qa.im.Runner;
 import com.qa.im.dao.ItemOrderDao;
 import com.qa.im.dao.OrderDao;
 import com.qa.im.dao.OrderSearchTypes;
+import com.qa.im.sqldatatypes.Customer;
 import com.qa.im.sqldatatypes.ItemOrder;
 import com.qa.im.sqldatatypes.Order;
 import com.qa.im.utils.Utils;
@@ -64,6 +67,20 @@ public class ItemOrderServices {
 		itemOrder.setQuantity(Utils.quantityInput());
 		// add to itemOrders
 		dao.create(itemOrder);
+	}
+	
+	public void viewAll() {
+		/**
+		 * Displays the itemOrder table
+		 */
+		// create customer arraylist
+		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
+		// populate arraylist
+		itemOrders = dao.readAll();
+		// print result
+		for (ItemOrder i : itemOrders) {
+			Runner.LOGGER.info("id: " + i.getId() + " item_id: " + i.getItemID() + " order_id:  " + i.getOrderID() + " quantity: " + i.getQuantity());
+		}
 	}
 	
 	public void updateQuantity() {
