@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.qa.im.Runner;
 import com.qa.im.dao.ItemOrderDao;
+import com.qa.im.dao.ItemOrderSearchTypes;
 import com.qa.im.dao.OrderDao;
 import com.qa.im.dao.OrderSearchTypes;
 import com.qa.im.sqldatatypes.Customer;
@@ -18,8 +19,8 @@ public class ItemOrderServices {
 	 * Update Item quantity in Order
 	 * Delete an Item from Order
 	 */
-	ItemOrderDao dao = new ItemOrderDao();
-	OrderDao orderDao = new OrderDao();
+	private ItemOrderDao dao = new ItemOrderDao();
+	private OrderDao orderDao = new OrderDao();
 	public void addItemOrder() {
 		/**
 		 * Link an item to an order and save the quantity desired
@@ -83,13 +84,44 @@ public class ItemOrderServices {
 		}
 	}
 	
+	public ArrayList<ItemOrder> findRecord(int recordID) {
+		/**
+		 * Find all itemOrders linked to a specified id
+		 * search id must be set with ItemOrderDao.setSearchID() prior to calling this function
+		 */
+//		create order listarray
+		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
+//		get itemOrders
+		itemOrders = dao.readRecords(recordID);
+		if (itemOrders.size() > 0) {
+			for (ItemOrder i : itemOrders) {
+				Runner.LOGGER.info("id: " + i.getId() + " item_id: " + i.getItemID() + " order_id:  " + i.getOrderID() + " quantity: " + i.getQuantity());
+			}
+		}
+		else {
+			Runner.LOGGER.info("Could not find " + dao.getSearchID() + ": " + recordID);
+		}
+		return itemOrders;
+	}
+	
 	public void updateQuantity() {
 		/**
 		 * alter the quantity of an item in an order
 		 */
 		// get order id and item id
-		// get new quantity
+		ItemOrder itemOrder = new ItemOrder();
+		dao.setSearchID(ItemOrderSearchTypes.ITEMORDER.getSearchType());
+		Runner.LOGGER.info("Please enter the Item Order id you want to update:");
+		itemOrder.setId(Utils.idInput()); 
+		while (findRecord(itemOrder.getId()).isEmpty() == true) {
+			Runner.LOGGER.info("Please enter the Item Order id you want to update:");
+			itemOrder.setId(Utils.idInput());
+		}
+		// get quantity
+		Runner.LOGGER.info("Please enter the quantity of the item you want:");
+		itemOrder.setQuantity(Utils.quantityInput());
 		// update quantity
+		dao.update(itemOrder);
 		// update order cost
 	}
 	public void deleteItemOrder() {

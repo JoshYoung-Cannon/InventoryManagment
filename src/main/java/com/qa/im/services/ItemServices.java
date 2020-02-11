@@ -17,7 +17,7 @@ public class ItemServices {
 	private int itemNameMaxLength = 100;
 	private double maxValue = 99999.99;
 
-	ItemDao dao = new ItemDao();
+	private ItemDao dao = new ItemDao();
 
 	public void add() {
 		/**

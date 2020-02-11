@@ -15,7 +15,7 @@ public class CustomerServices {
 	 */
 	private int firstNameMaxLength = 20, lastNameMaxLength = 30;
 
-	CustomerDao dao = new CustomerDao();
+	private CustomerDao dao = new CustomerDao();
 
 	public void add() {
 		/**

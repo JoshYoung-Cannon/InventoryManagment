@@ -2,6 +2,7 @@ package com.qa.im;
 
 import org.apache.log4j.Logger;
 
+import com.qa.im.dao.ItemOrderSearchTypes;
 import com.qa.im.services.CustomerServices;
 import com.qa.im.services.ItemOrderServices;
 import com.qa.im.services.ItemServices;
@@ -24,9 +25,10 @@ public class Runner {
 		ItemServices item = new ItemServices();
 		OrderServices ord = new OrderServices();
 		ItemOrderServices test = new ItemOrderServices();
-		cus.viewAll();
-//		ord.viewAll();
-//		item.viewAll();
 		test.viewAll();
+		test.updateQuantity();
+		test.viewAll();
+		
+		
 	}
 }

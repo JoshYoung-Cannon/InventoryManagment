@@ -22,6 +22,7 @@ public class ItemDao implements Dao<Item> {
 					+ r.getValue() + ")");
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: " + r.getName());
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 	}
@@ -42,6 +43,7 @@ public class ItemDao implements Dao<Item> {
 			}
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not read Items table");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 		return items;
@@ -62,6 +64,7 @@ public class ItemDao implements Dao<Item> {
 			}
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not read Customers table");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 		return items;
@@ -75,6 +78,7 @@ public class ItemDao implements Dao<Item> {
 			}
 		catch (Exception e) {
 			Runner.LOGGER.info("Error could not update Customer record");
+			Runner.LOGGER.info(e);
 		}
 		
 		// TODO Auto-generated method stub
@@ -89,6 +93,7 @@ public class ItemDao implements Dao<Item> {
 			}
 		catch (Exception e) {
 			Runner.LOGGER.info("Error could not delete item record");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 

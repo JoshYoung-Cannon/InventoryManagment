@@ -15,9 +15,9 @@ public class OrderServices {
 	 * Contains logic for: Calculate cost of Order Add Order View all Orders Delete
 	 * Order
 	 */
-	OrderDao dao = new OrderDao();
-	CustomerServices customerServices = new CustomerServices();
-	ItemOrderServices itemOrderServices = new ItemOrderServices();
+	private OrderDao dao = new OrderDao();
+	private CustomerServices customerServices = new CustomerServices();
+	private ItemOrderServices itemOrderServices = new ItemOrderServices();
 
 	public void add() {
 

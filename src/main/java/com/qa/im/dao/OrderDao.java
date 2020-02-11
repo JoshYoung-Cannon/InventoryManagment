@@ -30,6 +30,7 @@ public class OrderDao implements Dao<Order> {
 			statement.executeUpdate("insert into orders(customer_id) values(" + r.getCustomer_id() + ")");
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: Customer " + r.getCustomer_id() + " to Orders table");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 
@@ -50,6 +51,7 @@ public class OrderDao implements Dao<Order> {
 			}
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not read Customers table");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 		return orders;
@@ -70,6 +72,7 @@ public class OrderDao implements Dao<Order> {
 			}
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not read Customers table");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 		return orders;
@@ -87,6 +90,7 @@ public class OrderDao implements Dao<Order> {
 			statement.executeUpdate("delete from orders where id = " + id);
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not delete order record");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 
