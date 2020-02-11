@@ -11,23 +11,34 @@ import com.qa.im.sqldatatypes.Customer;
 import com.qa.im.sqldatatypes.Order;
 import com.qa.im.utils.Config;
 
-public class OrderDao implements Dao<Order>{
+public class OrderDao implements Dao<Order> {
+	private static String searchID;
+
+	public String getSearchID() {
+		return searchID;
+	}
+
+	public void setSearchID(String searchID) {
+		OrderDao.searchID = searchID;
+	}
 
 	public void create(Order r) {
-		//insert into orders(customer_id) values(2);
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
+		// insert into orders(customer_id) values(2);
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db",
+				Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into orders(customer_id) values(" + r.getCustomer_id() + ")");
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: Customer " + r.getCustomer_id() + " to Orders table");
 		}
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public ArrayList<Order> readAll() {
 		ArrayList<Order> orders = new ArrayList<Order>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db",
+				Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from orders");
 			while (resultSet.next()) {
@@ -43,12 +54,13 @@ public class OrderDao implements Dao<Order>{
 		// TODO Auto-generated method stub
 		return orders;
 	}
-	
+
 	public ArrayList<Order> readRecords(int rID) {
 		ArrayList<Order> orders = new ArrayList<Order>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db",
+				Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from orders where customer_id = " + rID);
+			ResultSet resultSet = statement.executeQuery("select * from orders where " + OrderDao.searchID + " = " + rID);
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				int customerID = resultSet.getInt("customer_id");
@@ -65,12 +77,19 @@ public class OrderDao implements Dao<Order>{
 
 	public void update(Order r) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void delete(int id) {
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db",
+				Config.username, Config.password)) {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("delete from orders where id = " + id);
+		} catch (Exception e) {
+			Runner.LOGGER.info("Error could not delete order record");
+		}
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
