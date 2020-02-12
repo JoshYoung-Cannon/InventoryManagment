@@ -13,6 +13,8 @@ import com.qa.im.utils.Config;
 
 public class OrderDao implements Dao<Order> {
 	private static String searchID;
+	private double discountThreshold = 10000;
+	private double discountRate = 0.1;
 
 	public String getSearchID() {
 		return searchID;
@@ -62,7 +64,8 @@ public class OrderDao implements Dao<Order> {
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db",
 				Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from orders where " + OrderDao.searchID + " = " + rID);
+			ResultSet resultSet = statement
+					.executeQuery("select * from orders where " + OrderDao.searchID + " = " + rID);
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				int customerID = resultSet.getInt("customer_id");
@@ -79,6 +82,38 @@ public class OrderDao implements Dao<Order> {
 	}
 
 	public void update(Order r) {
+		// select sum(quantity * item_value) from (select quantity, item_value, order_id
+		// from items join item_orders on items.id = item_orders.item_id) as
+		// item_quantity where order_id = 5;
+		// sum the values of quantity cost
+		double total = 0;
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db",
+				Config.username, Config.password)) {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(
+					"select sum(quantity * item_value) from (select quantity, item_value, order_id from items join item_orders on items.id = item_orders.item_id) as item_quantity where order_id = "
+							+ r.getId());
+			while (resultSet.next()) {
+				total = resultSet.getDouble("sum(quantity * item_value)");
+			}
+			// apply discount
+			if (total > discountThreshold) {
+				double discount = total * discountRate;
+				total -= discount;
+			}
+			// save total cost
+			r.setTotal(total);
+			try {
+				// update orders set total = 0 where id = 5;
+				statement.executeUpdate("update orders set total = " + r.getTotal() + " where id = " + r.getId());
+			} catch (Exception e) {
+				Runner.LOGGER.info("Error could not update Order total");
+				Runner.LOGGER.info(e);
+			}
+		} catch (Exception e) {
+			Runner.LOGGER.info("Error could not read Item / Item Orders join");
+			Runner.LOGGER.info(e);
+		}
 		// TODO Auto-generated method stub
 
 	}
