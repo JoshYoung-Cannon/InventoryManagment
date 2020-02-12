@@ -1,5 +1,10 @@
-package com.qa.im;
+package com.qa.im.enums;
 
+/**
+ * All CRUD menu options
+ * @author Admin
+ *
+ */
 public enum CrudOptions {
 	CREATE ("CREATE"),
 	READALL ("READ ALL"),

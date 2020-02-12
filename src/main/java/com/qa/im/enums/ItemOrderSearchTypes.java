@@ -1,7 +1,12 @@
-package com.qa.im;
+package com.qa.im.enums;
 
+/**
+ * A list of Item Order fields
+ * @author Admin
+ *
+ */
 public enum ItemOrderSearchTypes {
-	ITEMORDER ("id"),
+	ITEM_ORDER ("id"),
 	ITEM ("item_id"),
 	ORDER ("order_id"),
 	QUANTITY ("quantity");

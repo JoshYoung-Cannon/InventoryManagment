@@ -1,8 +1,8 @@
 package com.qa.im.controller;
 
-import com.qa.im.CrudOptions;
 import com.qa.im.Runner;
-import com.qa.im.TableOptions;
+import com.qa.im.enums.CrudOptions;
+import com.qa.im.enums.TableOptions;
 import com.qa.im.services.CustomerServices;
 import com.qa.im.services.ItemOrderServices;
 import com.qa.im.services.ItemServices;
@@ -10,8 +10,17 @@ import com.qa.im.services.OrderServices;
 import com.qa.im.utils.Config;
 import com.qa.im.utils.Utils;
 
+
+/**
+ * This contains all the logic for menu navigation, and completing functionality whilst avoiding infinite loops.
+ * @author Admin
+ *
+ */
 public class Controller {
 
+	/**
+	 * run() is the system startup
+	 */
 	public void run() {
 		boolean running = true;
 		CustomerServices customer = new CustomerServices();
@@ -119,6 +128,10 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * gets the users menu choice and ensures that it is valid CRUD option
+	 * @return
+	 */
 	public String getCRUDChoice() {
 		String crudChoice = null;
 		while (crudChoice == null) {
@@ -143,6 +156,10 @@ public class Controller {
 		return crudChoice;
 	}
 
+	/**
+	 * gets the users menu choice and ensures that it is valid table in the database
+	 * @return
+	 */
 	public String getTableChoice() {
 		String tableChoice = null;
 		while (tableChoice == null) {
@@ -167,6 +184,9 @@ public class Controller {
 		return tableChoice;
 	}
 
+	/**
+	 * outputs the CRUD menu
+	 */
 	public void displayCRUD() {
 		Runner.LOGGER.info("What would you like to do?");
 		Runner.LOGGER.info(CrudOptions.CREATE.getCrudOption());
@@ -176,6 +196,9 @@ public class Controller {
 		Runner.LOGGER.info(CrudOptions.BACK.getCrudOption());
 	}
 
+	/**
+	 * outputs the table menu
+	 */
 	public void displayTables() {
 		Runner.LOGGER.info("Which table would you like to use?");
 		Runner.LOGGER.info(TableOptions.CUSTOMERS.getTableOption());

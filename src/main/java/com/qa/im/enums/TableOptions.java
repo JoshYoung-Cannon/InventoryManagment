@@ -1,5 +1,10 @@
-package com.qa.im;
+package com.qa.im.enums;
 
+/**
+ * All table menu options
+ * @author Admin
+ *
+ */
 public enum TableOptions {
 	CUSTOMERS ("CUSTOMERS"),
 	ITEMS ("ITEMS"),

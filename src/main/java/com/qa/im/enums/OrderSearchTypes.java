@@ -1,5 +1,10 @@
-package com.qa.im;
+package com.qa.im.enums;
 
+/**
+ * A list of Order fields
+ * @author Admin
+ *
+ */
 public enum OrderSearchTypes {
 	ORDER ("id"),
 	CUSTOMER ("customer_id"),

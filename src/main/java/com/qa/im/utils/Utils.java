@@ -4,9 +4,18 @@ import java.util.Scanner;
 
 import com.qa.im.Runner;
 
-// add exceptions
-
+/**
+ * Holds all user input methods
+ * @author Admin
+ *
+ */
 public class Utils {
+	/**
+	 * Used to get username and password string values from the user
+	 * inputName is simply a string to inform the user what field they are filling
+	 * @param inputName
+	 * @return
+	 */
 	public static String logInput(String inputName) {
 		Scanner scanner = new Scanner(System.in);
 		String strVal = null;
@@ -20,6 +29,14 @@ public class Utils {
 		return strVal;
 	}
 	
+	/**
+	 * Used to get name values e.g customer name
+	 * charLimit is used to ensure the input with match with the SQL varchar size
+	 * inputName is simply a string to inform the user what field they are filling
+	 * @param charLimit
+	 * @param inputName
+	 * @return
+	 */
 	public static String strInput(int charLimit, String inputName) {
 		Scanner scanner = new Scanner(System.in);
 		String strVal = null;
@@ -33,6 +50,11 @@ public class Utils {
 		return strVal;
 	}
 
+	/**
+	 * Used to get int id values e.g customer id
+	 * will only return when a int is given
+	 * @return
+	 */
 	public static int idInput() {
 		Scanner scanner = new Scanner(System.in);
 		String temp = null;
@@ -50,6 +72,12 @@ public class Utils {
 		return idVal;
 	}
 	
+	/**
+	 * Used to get double values e.g item value
+	 * will only return when a valid input is given (must be > 0 and less than the max value the field can hold)
+	 * maxInputValue holds the max value the field can hold
+	 * @return
+	 */
 	public static double valueInput(double maxInputValue) {
 		Scanner scanner = new Scanner(System.in);
 		String temp = null;
@@ -71,6 +99,11 @@ public class Utils {
 		return value;
 	}
 	
+	/**
+	 * Used to get int quantity values
+	 * will only return when a int is given
+	 * @return
+	 */
 	public static int quantityInput() {
 		Scanner scanner = new Scanner(System.in);
 		String temp = null;
