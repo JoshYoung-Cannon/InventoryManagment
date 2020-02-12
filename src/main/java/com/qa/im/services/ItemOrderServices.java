@@ -21,6 +21,7 @@ public class ItemOrderServices {
 	 */
 	private ItemOrderDao dao = new ItemOrderDao();
 	private OrderDao orderDao = new OrderDao();
+	
 	public void addItemOrder() {
 		/**
 		 * Link an item to an order and save the quantity desired
@@ -140,17 +141,19 @@ public class ItemOrderServices {
 			itemOrder.setId(Utils.idInput());
 		}
 		dao.delete(itemOrder.getId());
-		// update all order costs
 	}
 	
 	public void deleteItemOrderByForiegnKey(int foriegnID, ItemOrderSearchTypes fieldName) {
 		/**
 		 * delete any record with a given item/order id
 		 */
-		// get item/order id
 		// store array of appropriate itemOrder ids
+		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
+		dao.setSearchID(fieldName.getSearchType());
+		itemOrders = findRecord(foriegnID);
 		// go through array removing records
-		// check if any orders have no items remove those that dont
-		// update all order costs
+		for (ItemOrder i : itemOrders) {
+			dao.delete(i.getId());
+		}
 	}
 }

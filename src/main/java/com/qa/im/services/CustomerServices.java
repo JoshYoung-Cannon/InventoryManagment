@@ -95,6 +95,7 @@ public class CustomerServices {
 		/**
 		 * Removes a record from the Customer table
 		 */
+		OrderServices orderServices = new OrderServices();
 		// get customer selection
 		Customer customer = new Customer();
 		Runner.LOGGER.info("Please enter the ID of the Customer you want to delete:");
@@ -104,6 +105,7 @@ public class CustomerServices {
 			customer.setId(Utils.idInput());
 		}
 		// delete any connected order records
+		orderServices.deleteOrder(customer.getId());
 		// delete record
 		dao.delete(customer.getId());
 	}
