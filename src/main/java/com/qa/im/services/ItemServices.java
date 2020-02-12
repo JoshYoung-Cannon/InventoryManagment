@@ -24,14 +24,13 @@ public class ItemServices {
 		 * Asks for the new Items name and value then adds it to the Items table
 		 */
 		// try to get a name
-		Runner.LOGGER.info("Please enter an item name:");
+		Runner.LOGGER.info("Please enter an Item name:");
 		String itemName = Utils.strInput(itemNameMaxLength, NameTypes.FORENAME.getNameType());
 		// try to get a value
-		Runner.LOGGER.info("Please enter an item value (range: £0.00 - £99999.99):");
+		Runner.LOGGER.info("Please enter an Item value (range: £0.00 - £99999.99):");
 		double itemValue = Utils.valueInput(maxValue);
 		// add to database
 		dao.create(new Item(itemName, itemValue));
-		Runner.LOGGER.info("Added item: " + itemName + " £" + itemValue);
 	}
 
 	public void viewAll() {
@@ -61,7 +60,7 @@ public class ItemServices {
 			}
 			itemsFound = true;
 		} else {
-			Runner.LOGGER.info("Could not find item record with id: " + recordID);
+			Runner.LOGGER.info("Could not find Item record with id: " + recordID);
 		}
 		return itemsFound;
 	}
@@ -83,9 +82,9 @@ public class ItemServices {
 			Runner.LOGGER.info("Update Item: ");
 		}
 		// enter modification
-		Runner.LOGGER.info("Please enter a item name:");
+		Runner.LOGGER.info("Please enter a Item name:");
 		itemName = Utils.strInput(itemNameMaxLength, NameTypes.ITEMNAME.getNameType());
-		Runner.LOGGER.info("Please enter a item value:");
+		Runner.LOGGER.info("Please enter a Item value:");
 		itemVal = Utils.valueInput(maxValue);
 		item.setName(itemName);
 		item.setValue(itemVal);		
@@ -99,16 +98,15 @@ public class ItemServices {
 		 */
 		// get item selection
 		Item item = new Item();
-		Runner.LOGGER.info("Please enter the ID of the item you want to delete:");
+		Runner.LOGGER.info("Please enter the ID of the Item you want to delete:");
 		item.setId(Utils.idInput());
 		while (findRecord(item.getId()) == false) {
-			Runner.LOGGER.info("Please enter the ID of the item you want to delete:");
+			Runner.LOGGER.info("Please enter the ID of the Item you want to delete:");
 			item.setId(Utils.idInput());
 		}
 		// delete any connected itemOrder records
-		// update orders
 		// delete item
 		dao.delete(item.getId());
-		Runner.LOGGER.info("Item deleted");
+		
 	}
 }

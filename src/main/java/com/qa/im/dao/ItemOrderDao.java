@@ -27,6 +27,7 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into item_orders(item_id, order_id, quantity) values(" + r.getItemID()
 					+ ", " + r.getOrderID() + ", " + r.getQuantity() + ")");
+			Runner.LOGGER.info("Created Item Order: " + r.getId() + " item_id: " + r.getItemID() + " order_id:  " + r.getOrderID() + " quantity: " + r.getQuantity());
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: item " + r.getItemID() + " to order " + r.getOrderID());
 			Runner.LOGGER.info(e);
@@ -87,6 +88,7 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 				Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("update item_orders set quantity = " + r.getQuantity() + " where id = " + r.getId());
+			Runner.LOGGER.info("Updated Item Order: " + r.getId() + " To item_id: " + r.getItemID() + " order_id:  " + r.getOrderID() + " quantity: " + r.getQuantity());
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not update item_order record: " + r.getId());
 			Runner.LOGGER.info(e);
@@ -100,13 +102,13 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("delete from item_orders where id = " + id);
+			Runner.LOGGER.info("Deleted Item Order");
 			}
 		catch (Exception e) {
 			Runner.LOGGER.info("Error could not delete Item Order record");
 			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
-
 	}
 
 }
