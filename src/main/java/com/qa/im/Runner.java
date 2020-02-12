@@ -25,9 +25,8 @@ public class Runner {
 		ItemServices item = new ItemServices();
 		OrderServices ord = new OrderServices();
 		ItemOrderServices test = new ItemOrderServices();
-		test.viewAll();
-		test.deleteItemOrder();
-		test.viewAll();
+		ord.calculateCost();
+		ord.viewAll();
 		
 		
 	}

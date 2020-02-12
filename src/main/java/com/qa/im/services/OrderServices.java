@@ -82,11 +82,16 @@ public class OrderServices {
 		/**
 		 * Calculate the total cost of the Order and apply any appropriate discounts
 		 */
-//		 get order id
+//		 loop through all orders
+		ArrayList<Order> orders = new ArrayList<Order>();
+		orders = dao.readAll();
 //		 look through linked item orders getting quantity costs (join item and itemOrders)
-//		 sum the values of quantity cost
-//		 apply discount
-//		 save total cost
+		for (Order i : orders) {
+//			 sum the values of quantity cost
+//			 apply discount
+//			 save total cost
+			dao.update(i);
+		}
 	}
 
 	public void deleteOrder() {
