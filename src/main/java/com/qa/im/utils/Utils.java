@@ -7,6 +7,19 @@ import com.qa.im.Runner;
 // add exceptions
 
 public class Utils {
+	public static String logInput(String inputName) {
+		Scanner scanner = new Scanner(System.in);
+		String strVal = null;
+		while (strVal == null) {
+			strVal = scanner.nextLine();
+			if (strVal.length() == 0) {
+				Runner.LOGGER.info("Please enter a " + inputName);
+				strVal = null;
+			}
+		}
+		return strVal;
+	}
+	
 	public static String strInput(int charLimit, String inputName) {
 		Scanner scanner = new Scanner(System.in);
 		String strVal = null;

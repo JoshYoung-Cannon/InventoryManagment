@@ -25,7 +25,7 @@ public class ItemServices {
 		 */
 		// try to get a name
 		Runner.LOGGER.info("Please enter an Item name:");
-		String itemName = Utils.strInput(itemNameMaxLength, NameTypes.FORENAME.getNameType());
+		String itemName = Utils.strInput(itemNameMaxLength, NameTypes.ITEMNAME.getNameType());
 		// try to get a value
 		Runner.LOGGER.info("Please enter an Item value (range: £0.00 - £99999.99):");
 		double itemValue = Utils.valueInput(maxValue);
