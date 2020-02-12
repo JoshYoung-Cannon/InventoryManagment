@@ -2,9 +2,9 @@ package com.qa.im.services;
 
 import java.util.ArrayList;
 
+import com.qa.im.OrderSearchTypes;
 import com.qa.im.Runner;
 import com.qa.im.dao.OrderDao;
-import com.qa.im.dao.OrderSearchTypes;
 import com.qa.im.sqldatatypes.Customer;
 import com.qa.im.sqldatatypes.Item;
 import com.qa.im.sqldatatypes.Order;
@@ -23,17 +23,16 @@ public class OrderServices {
 
 //		 get customer id
 		int customerID;
-		Runner.LOGGER.info("Please enter the Customer id you want to make an order for:");
+		Runner.LOGGER.info("Please enter the Customer id you want to make an Order for:");
 		customerID = Utils.idInput();
 		while (customerServices.findRecord(customerID) == false) {
-			Runner.LOGGER.info("Please enter the Customer id you want to make an order for:");
+			Runner.LOGGER.info("Please enter the Customer id you want to make an Order for:");
 			customerID = Utils.idInput();
 		}
 //		 add customer id to order
 		Order order = new Order(customerID);
 //		 add order to database
 		dao.create(order);
-		Runner.LOGGER.info("Order added");
 //		 get orders id
 		dao.setSearchID(OrderSearchTypes.TOTAL.getSearchType());
 		order = findRecord(0).get(0);
@@ -87,9 +86,7 @@ public class OrderServices {
 		orders = dao.readAll();
 //		 look through linked item orders getting quantity costs (join item and itemOrders)
 		for (Order i : orders) {
-//			 sum the values of quantity cost
-//			 apply discount
-//			 save total cost
+//			 sum the values of quantity cost and apply discounts
 			dao.update(i);
 		}
 	}
@@ -101,15 +98,14 @@ public class OrderServices {
 		// Get Order id
 		Order order = new Order();
 		dao.setSearchID(OrderSearchTypes.ORDER.getSearchType());
-		Runner.LOGGER.info("Please enter the ID of the order you want to delete:");
+		Runner.LOGGER.info("Please enter the ID of the Order you want to delete:");
 		order.setId(Utils.idInput());
 		while (findRecord(order.getId()).size() <= 0) {
-			Runner.LOGGER.info("Please enter the ID of the order you want to delete:");
+			Runner.LOGGER.info("Please enter the ID of the Order you want to delete:");
 			order.setId(Utils.idInput());
 		}
 		// Look through itemOrders and delete any dependent records
 		// Delete Order
 		dao.delete(order.getId());
-		Runner.LOGGER.info("Item deleted");
 	}
 }

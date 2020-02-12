@@ -1,4 +1,4 @@
-package com.qa.im.dao;
+package com.qa.im;
 
 public enum OrderSearchTypes {
 	ORDER ("id"),

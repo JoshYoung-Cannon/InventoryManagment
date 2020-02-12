@@ -30,6 +30,7 @@ public class OrderDao implements Dao<Order> {
 				Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into orders(customer_id) values(" + r.getCustomer_id() + ")");
+			Runner.LOGGER.info("Order added");
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: Customer " + r.getCustomer_id() + " to Orders table");
 			Runner.LOGGER.info(e);
@@ -123,6 +124,7 @@ public class OrderDao implements Dao<Order> {
 				Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("delete from orders where id = " + id);
+			Runner.LOGGER.info("Order deleted");
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not delete order record");
 			Runner.LOGGER.info(e);

@@ -31,7 +31,6 @@ public class CustomerServices {
 		Customer customer = new Customer(firstName, lastName);
 		// add to database
 		dao.create(customer);
-		Runner.LOGGER.info("Added customer: " + lastName + ", " + firstName);
 
 	}
 
@@ -63,7 +62,7 @@ public class CustomerServices {
 			customersFound = true;
 		}
 		else {
-			Runner.LOGGER.info("Could not find customer record with id: " + recordID);
+			Runner.LOGGER.info("Could not find Customer with id: " + recordID);
 		}
 		return customersFound;
 	}
@@ -90,7 +89,6 @@ public class CustomerServices {
 		customer.setForname(firstName);
 		customer.setSurname(lastName);
 		dao.update(customer);
-		Runner.LOGGER.info("Updated customer: " + lastName + ", " + firstName);
 	}
 
 	public void delete() {
@@ -108,6 +106,5 @@ public class CustomerServices {
 		// delete any connected order records
 		// delete record
 		dao.delete(customer.getId());
-		Runner.LOGGER.info("Customer deleted");
 	}
 }

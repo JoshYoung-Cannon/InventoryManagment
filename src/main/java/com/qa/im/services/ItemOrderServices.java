@@ -2,11 +2,11 @@ package com.qa.im.services;
 
 import java.util.ArrayList;
 
+import com.qa.im.ItemOrderSearchTypes;
+import com.qa.im.OrderSearchTypes;
 import com.qa.im.Runner;
 import com.qa.im.dao.ItemOrderDao;
-import com.qa.im.dao.ItemOrderSearchTypes;
 import com.qa.im.dao.OrderDao;
-import com.qa.im.dao.OrderSearchTypes;
 import com.qa.im.sqldatatypes.Customer;
 import com.qa.im.sqldatatypes.ItemOrder;
 import com.qa.im.sqldatatypes.Order;
@@ -36,17 +36,18 @@ public class ItemOrderServices {
 			Runner.LOGGER.info("Please enter the Order id you want to make an order for:");
 			itemOrder.setOrderID(Utils.idInput());
 		}
-		Runner.LOGGER.info("Please enter the Item id you want to add to:");
+		Runner.LOGGER.info("Please enter the Item id you want to add to Order:");
 		itemOrder.setItemID(Utils.idInput());
 		while (item.findRecord(itemOrder.getItemID()) == false) {
-			Runner.LOGGER.info("Please enter the Order id you want to make an order for:");
+			Runner.LOGGER.info("Please enter the Item id you want to add to Order:");
 			itemOrder.setItemID(Utils.idInput());
 		}
 		// get quantity
-		Runner.LOGGER.info("Please enter the quantity of the item you want:");
+		Runner.LOGGER.info("Please enter the quantity of the Item you want:");
 		itemOrder.setQuantity(Utils.quantityInput());
 		// add to itemOrders
 		dao.create(itemOrder);
+		// update order cost
 	}
 	
 	public void addItemOrder(int orderID) {
@@ -60,14 +61,15 @@ public class ItemOrderServices {
 		Runner.LOGGER.info("Please enter the Item id you want to add to:");
 		itemOrder.setItemID(Utils.idInput());
 		while (item.findRecord(itemOrder.getItemID()) == false) {
-			Runner.LOGGER.info("Please enter the Order id you want to make an order for:");
+			Runner.LOGGER.info("Please enter the Order id you want to make an Order for:");
 			itemOrder.setItemID(Utils.idInput());
 		}
 		// get quantity
-		Runner.LOGGER.info("Please enter the quantity of the item you want:");
+		Runner.LOGGER.info("Please enter the quantity of the Item you want:");
 		itemOrder.setQuantity(Utils.quantityInput());
 		// add to itemOrders
 		dao.create(itemOrder);
+		// update order cost
 	}
 	
 	public void viewAll() {
@@ -118,7 +120,7 @@ public class ItemOrderServices {
 			itemOrder.setId(Utils.idInput());
 		}
 		// get quantity
-		Runner.LOGGER.info("Please enter the quantity of the item you want:");
+		Runner.LOGGER.info("Please enter the quantity of the Item you want:");
 		itemOrder.setQuantity(Utils.quantityInput());
 		// update quantity
 		dao.update(itemOrder);
@@ -138,6 +140,7 @@ public class ItemOrderServices {
 			itemOrder.setId(Utils.idInput());
 		}
 		dao.delete(itemOrder.getId());
+		// update all order costs
 	}
 	
 	public void deleteItemOrderByForiegnKey(int foriegnID, ItemOrderSearchTypes fieldName) {

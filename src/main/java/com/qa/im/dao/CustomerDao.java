@@ -17,6 +17,7 @@ public class CustomerDao implements Dao<Customer> {
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into customers(customer_name) values('" + r.getSurname() + ", " + r.getForname() + "')");
+			Runner.LOGGER.info("Added customer: " + r.getSurname() + ", " + r.getForname());
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: " + r.getSurname() + ", " + r.getForname());
 			Runner.LOGGER.info(e);
@@ -69,6 +70,8 @@ public class CustomerDao implements Dao<Customer> {
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("update customers set customer_name = '" + r.getSurname() + ", " + r.getForname() + "' where id = " + r.getId());
+			Runner.LOGGER.info("Updated customer: " + r.getSurname() + ", " + r.getForname());
+			Runner.LOGGER.info("Updated customer: " + r.getId() + " to: " + r.getSurname() + ", " + r.getForname());
 			}
 		catch (Exception e) {
 			Runner.LOGGER.info("Error could not update Customer record");
@@ -83,6 +86,7 @@ public class CustomerDao implements Dao<Customer> {
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("delete from customers where id = " + id);
+			Runner.LOGGER.info("Customer deleted");
 			}
 		catch (Exception e) {
 			Runner.LOGGER.info("Error could not delete Customer record");
