@@ -2,6 +2,7 @@ package com.qa.im.services;
 
 import java.util.ArrayList;
 
+import com.qa.im.ItemOrderSearchTypes;
 import com.qa.im.NameTypes;
 import com.qa.im.Runner;
 import com.qa.im.dao.ItemDao;
@@ -27,7 +28,7 @@ public class ItemServices {
 		Runner.LOGGER.info("Please enter an Item name:");
 		String itemName = Utils.strInput(itemNameMaxLength, NameTypes.ITEMNAME.getNameType());
 		// try to get a value
-		Runner.LOGGER.info("Please enter an Item value (range: £0.00 - £99999.99):");
+		Runner.LOGGER.info("Please enter an Item value (range: £0.01 - £99999.99):");
 		double itemValue = Utils.valueInput(maxValue);
 		// add to database
 		dao.create(new Item(itemName, itemValue));
@@ -96,6 +97,7 @@ public class ItemServices {
 		/**
 		 * delete an item
 		 */
+		ItemOrderServices itemOrderServices = new ItemOrderServices();
 		// get item selection
 		Item item = new Item();
 		Runner.LOGGER.info("Please enter the ID of the Item you want to delete:");
@@ -105,6 +107,7 @@ public class ItemServices {
 			item.setId(Utils.idInput());
 		}
 		// delete any connected itemOrder records
+		itemOrderServices.deleteItemOrderByForiegnKey(item.getId(), ItemOrderSearchTypes.ITEM);
 		// delete item
 		dao.delete(item.getId());
 		

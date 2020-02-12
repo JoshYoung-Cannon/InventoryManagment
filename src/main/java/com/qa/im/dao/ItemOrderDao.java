@@ -27,7 +27,7 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into item_orders(item_id, order_id, quantity) values(" + r.getItemID()
 					+ ", " + r.getOrderID() + ", " + r.getQuantity() + ")");
-			Runner.LOGGER.info("Created Item Order: " + r.getId() + " item_id: " + r.getItemID() + " order_id:  " + r.getOrderID() + " quantity: " + r.getQuantity());
+			Runner.LOGGER.info("Created Item Order: item_id: " + r.getItemID() + " order_id:  " + r.getOrderID() + " quantity: " + r.getQuantity());
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: item " + r.getItemID() + " to order " + r.getOrderID());
 			Runner.LOGGER.info(e);
