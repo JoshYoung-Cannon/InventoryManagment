@@ -58,13 +58,13 @@ public class Utils {
 			temp = scanner.nextLine();
 			try {
 				value = Double.parseDouble(temp);
-				if (value > maxInputValue) {
-					Runner.LOGGER.info("Please enter a valid value (range: £0.00 - £" + maxInputValue + "):");
+				if ((value > maxInputValue) || (value <= 0)){
+					Runner.LOGGER.info("Please enter a valid value (range: £0.01 - £" + maxInputValue + "):");
 					temp = null;
 				}
 			}
 			catch (Exception e) {
-				Runner.LOGGER.info("Please enter a valid value (range: £0.00 - £" + maxInputValue + "):");
+				Runner.LOGGER.info("Please enter a valid value (range: £0.01 - £" + maxInputValue + "):");
 				temp = null;
 			}
 		}

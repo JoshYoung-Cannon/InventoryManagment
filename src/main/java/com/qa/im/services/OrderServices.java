@@ -2,6 +2,7 @@ package com.qa.im.services;
 
 import java.util.ArrayList;
 
+import com.qa.im.ItemOrderSearchTypes;
 import com.qa.im.OrderSearchTypes;
 import com.qa.im.Runner;
 import com.qa.im.dao.OrderDao;
@@ -15,12 +16,11 @@ public class OrderServices {
 	 * Contains logic for: Calculate cost of Order Add Order View all Orders Delete
 	 * Order
 	 */
-	private OrderDao dao = new OrderDao();
-	private CustomerServices customerServices = new CustomerServices();
-	private ItemOrderServices itemOrderServices = new ItemOrderServices();
+	private OrderDao dao = new OrderDao(); 
 
 	public void add() {
-
+		ItemOrderServices itemOrderServices = new ItemOrderServices();
+		CustomerServices customerServices = new CustomerServices();
 //		 get customer id
 		int customerID;
 		Runner.LOGGER.info("Please enter the Customer id you want to make an Order for:");
@@ -48,10 +48,10 @@ public class OrderServices {
 //		 print result
 		if (orders.size() > 0) {
 			for (Order i : orders) {
-				Runner.LOGGER.info("Order: " + i.getId() + " Customer: " + i.getCustomer_id() + " Total: £" + i.getTotal());
+				Runner.LOGGER
+						.info("Order: " + i.getId() + " Customer: " + i.getCustomer_id() + " Total: £" + i.getTotal());
 			}
-		}
-		else {
+		} else {
 			Runner.LOGGER.info("There are no Orders");
 		}
 
@@ -59,8 +59,8 @@ public class OrderServices {
 
 	public ArrayList<Order> findRecord(int recordID) {
 		/**
-		 * Find all orders linked to a specified id
-		 * search id must be set with OrderDao.setSearchID() prior to calling this function
+		 * Find all orders linked to a specified id search id must be set with
+		 * OrderDao.setSearchID() prior to calling this function
 		 */
 //		create order listarray
 		ArrayList<Order> orders = new ArrayList<Order>();
@@ -68,10 +68,10 @@ public class OrderServices {
 		orders = dao.readRecords(recordID);
 		if (orders.size() > 0) {
 			for (Order i : orders) {
-				Runner.LOGGER.info("Order: " + i.getId() + " Customer: " + i.getCustomer_id() + " Total: £" + i.getTotal());
+				Runner.LOGGER
+						.info("Order: " + i.getId() + " Customer: " + i.getCustomer_id() + " Total: £" + i.getTotal());
 			}
-		}
-		else {
+		} else {
 			Runner.LOGGER.info("Could not find " + dao.getSearchID() + ": " + recordID);
 		}
 		return orders;
@@ -89,12 +89,19 @@ public class OrderServices {
 //			 sum the values of quantity cost and apply discounts
 			dao.update(i);
 		}
+		// delete empty orders
+		for (Order i : orders) {
+			if (i.getTotal() == 0) {
+				dao.delete(i.getId());
+			}
+		}
 	}
 
 	public void deleteOrder() {
 		/**
 		 * Delete a record from the Orders table
 		 */
+		ItemOrderServices itemOrderServices = new ItemOrderServices();
 		// Get Order id
 		Order order = new Order();
 		dao.setSearchID(OrderSearchTypes.ORDER.getSearchType());
@@ -105,7 +112,25 @@ public class OrderServices {
 			order.setId(Utils.idInput());
 		}
 		// Look through itemOrders and delete any dependent records
+		itemOrderServices.deleteItemOrderByForiegnKey(order.getId(), ItemOrderSearchTypes.ORDER);
 		// Delete Order
 		dao.delete(order.getId());
+	}
+
+	public void deleteOrder(int id) {
+		/**
+		 * Delete a record from the Orders table
+		 */
+		ItemOrderServices itemOrderServices = new ItemOrderServices();
+		// Get Order id
+		ArrayList<Order> orders = new ArrayList<Order>();
+		dao.setSearchID(OrderSearchTypes.CUSTOMER.getSearchType());
+		orders = findRecord(id);
+		for (Order i : orders) {
+			// Look through itemOrders and delete any dependent records
+			itemOrderServices.deleteItemOrderByForiegnKey(i.getId(), ItemOrderSearchTypes.ORDER);
+			// Delete Order
+			dao.delete(i.getId());
+		}
 	}
 }
