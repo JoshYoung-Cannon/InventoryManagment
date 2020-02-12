@@ -96,12 +96,14 @@ public class Controller {
 						break;
 					case ("ITEMS"):
 						item.deleteItem();
+						order.calculateCost();
 						break;
 					case ("ORDERS"):
 						order.deleteOrder();
 						break;
 					case ("ITEMS IN ORDERS"):
 						itemOrder.deleteItemOrder();
+						order.calculateCost();
 						break;
 					default:
 						break;
