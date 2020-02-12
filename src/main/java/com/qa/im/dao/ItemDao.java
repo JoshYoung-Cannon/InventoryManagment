@@ -20,8 +20,10 @@ public class ItemDao implements Dao<Item> {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into items(item_name, item_value) values('" + r.getName() + "', "
 					+ r.getValue() + ")");
+			Runner.LOGGER.info("Added item: " + r.getName() + " £" + r.getValue());
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: " + r.getName());
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 	}
@@ -42,6 +44,7 @@ public class ItemDao implements Dao<Item> {
 			}
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not read Items table");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 		return items;
@@ -62,6 +65,7 @@ public class ItemDao implements Dao<Item> {
 			}
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not read Customers table");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 		return items;
@@ -72,9 +76,11 @@ public class ItemDao implements Dao<Item> {
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("update items set item_name = '" + r.getName() + "', item_value = " + r.getValue() + " where id = " + r.getId());
+			Runner.LOGGER.info("Updated item: " + r.getId() + " to: " + r.getName() + " £" + r.getValue());
 			}
 		catch (Exception e) {
 			Runner.LOGGER.info("Error could not update Customer record");
+			Runner.LOGGER.info(e);
 		}
 		
 		// TODO Auto-generated method stub
@@ -86,9 +92,11 @@ public class ItemDao implements Dao<Item> {
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("delete from items where id = " + id);
+			Runner.LOGGER.info("Item deleted");
 			}
 		catch (Exception e) {
 			Runner.LOGGER.info("Error could not delete item record");
+			Runner.LOGGER.info(e);
 		}
 		// TODO Auto-generated method stub
 
