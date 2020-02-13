@@ -7,33 +7,40 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.qa.im.Runner;
-import com.qa.im.sqldatatypes.Customer;
 import com.qa.im.sqldatatypes.Item;
 import com.qa.im.utils.Config;
 
+/**
+ * Contains all DAO actions for the Items table
+ * 
+ * @author Admin
+ *
+ */
 public class ItemDao implements Dao<Item> {
 
+	/**
+	 * Create a new Item record
+	 */
 	public void create(Item r) {
-		// insert into items(item_name, item_value) values('Item Name', 101.00);
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db",
-				Config.username, Config.password)) {
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("insert into items(item_name, item_value) values('" + r.getName() + "', "
-					+ r.getValue() + ")");
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+				Config.username, Config.password); Statement statement = connection.createStatement()) {
+			statement.executeUpdate(
+					"insert into items(item_name, item_value) values('" + r.getName() + "', " + r.getValue() + ")");
 			Runner.LOGGER.info("Added item: " + r.getName() + " £" + r.getValue());
 		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not add: " + r.getName());
 			Runner.LOGGER.info(e);
 		}
-		// TODO Auto-generated method stub
+
 	}
 
+	/*
+	 * Copy the entire Items table into a ArrayList
+	 */
 	public ArrayList<Item> readAll() {
-		// select * from items;
 		ArrayList<Item> items = new ArrayList<Item>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db",
-				Config.username, Config.password)) {
-			Statement statement = connection.createStatement();
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			ResultSet resultSet = statement.executeQuery("select * from items");
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -46,15 +53,18 @@ public class ItemDao implements Dao<Item> {
 			Runner.LOGGER.info("Error could not read Items table");
 			Runner.LOGGER.info(e);
 		}
-		// TODO Auto-generated method stub
+
 		return items;
 	}
 
+	/**
+	 * Copy all responses to a value in a specific field of the Items table into a
+	 * ArrayList
+	 */
 	public ArrayList<Item> readRecords(int rID) {
 		ArrayList<Item> items = new ArrayList<Item>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db",
-				Config.username, Config.password)) {
-			Statement statement = connection.createStatement();
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			ResultSet resultSet = statement.executeQuery("select * from items where id = " + rID);
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -67,38 +77,38 @@ public class ItemDao implements Dao<Item> {
 			Runner.LOGGER.info("Error could not read Customers table");
 			Runner.LOGGER.info(e);
 		}
-		// TODO Auto-generated method stub
+
 		return items;
 	}
 
+	/**
+	 * Update the Item name and value of a specific record
+	 */
 	public void update(Item r) {
-		//update items set  item_name = "Updated name", item_value = 55 where id = 1;
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("update items set item_name = '" + r.getName() + "', item_value = " + r.getValue() + " where id = " + r.getId());
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+				Config.username, Config.password); Statement statement = connection.createStatement()) {
+			statement.executeUpdate("update items set item_name = '" + r.getName() + "', item_value = " + r.getValue()
+					+ " where id = " + r.getId());
 			Runner.LOGGER.info("Updated item: " + r.getId() + " to: " + r.getName() + " £" + r.getValue());
-			}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not update Customer record");
 			Runner.LOGGER.info(e);
 		}
-		
-		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Delete a record from the Items table
+	 */
 	public void delete(int id) {
-		//delete from items where id = 1;
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.246.120.12/inventory_db", Config.username, Config.password)) {
-			Statement statement = connection.createStatement();
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("delete from items where id = " + id);
 			Runner.LOGGER.info("Item deleted");
-			}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Runner.LOGGER.info("Error could not delete item record");
 			Runner.LOGGER.info(e);
 		}
-		// TODO Auto-generated method stub
 
 	}
 
