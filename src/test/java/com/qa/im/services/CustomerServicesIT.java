@@ -92,7 +92,11 @@ public class CustomerServicesIT {
 	
 	@Test
 	public void customerDeleteIT() {
-		
+		int id = 1;
+		Mockito.doReturn(id).when(customerServices).getIdInput();
+		Mockito.doReturn(true).when(customerServices).findRecord(id);
+		customerServices.delete();
+		Mockito.verify(dao, Mockito.times(1)).delete(id);
 	}
 	
 }
