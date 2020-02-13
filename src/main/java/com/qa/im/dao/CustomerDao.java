@@ -39,8 +39,9 @@ public class CustomerDao implements Dao<Customer> {
 	public ArrayList<Customer> readAll() {
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
-			ResultSet resultSet = statement.executeQuery("select * from customers");
+				Config.username, Config.password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("select * from customers")) {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				String fullName[] = resultSet.getString("customer_name").split(", ");
@@ -62,8 +63,9 @@ public class CustomerDao implements Dao<Customer> {
 	public ArrayList<Customer> readRecords(int rID) {
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
-			ResultSet resultSet = statement.executeQuery("select * from customers where id = " + rID);
+				Config.username, Config.password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("select * from customers where id = " + rID)) {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				String fullName[] = resultSet.getString("customer_name").split(", ");

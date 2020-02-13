@@ -55,8 +55,9 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	public ArrayList<ItemOrder> readAll() {
 		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
-			ResultSet resultSet = statement.executeQuery("select * from item_orders");
+				Config.username, Config.password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("select * from item_orders")) {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				int itemID = resultSet.getInt("item_id");
@@ -80,9 +81,10 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	public ArrayList<ItemOrder> readRecords(int rID) {
 		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
-			ResultSet resultSet = statement
-					.executeQuery("select * from item_orders where " + ItemOrderDao.searchID + " = " + rID);
+				Config.username, Config.password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement
+						.executeQuery("select * from item_orders where " + ItemOrderDao.searchID + " = " + rID)) {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				int itemID = resultSet.getInt("item_id");

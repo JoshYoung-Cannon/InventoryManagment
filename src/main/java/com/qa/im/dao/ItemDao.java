@@ -40,8 +40,9 @@ public class ItemDao implements Dao<Item> {
 	public ArrayList<Item> readAll() {
 		ArrayList<Item> items = new ArrayList<Item>();
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
-			ResultSet resultSet = statement.executeQuery("select * from items");
+				Config.username, Config.password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("select * from items")) {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				String itemName = resultSet.getString("item_name");
@@ -64,8 +65,9 @@ public class ItemDao implements Dao<Item> {
 	public ArrayList<Item> readRecords(int rID) {
 		ArrayList<Item> items = new ArrayList<Item>();
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
-			ResultSet resultSet = statement.executeQuery("select * from items where id = " + rID);
+				Config.username, Config.password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("select * from items where id = " + rID)) {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				String itemName = resultSet.getString("item_name");

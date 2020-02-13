@@ -12,6 +12,7 @@ import com.qa.im.utils.Config;
 
 /**
  * Contains all DAO actions for the Orders table
+ * 
  * @author Admin
  *
  */
@@ -79,8 +80,9 @@ public class OrderDao implements Dao<Order> {
 	public ArrayList<Order> readAll() {
 		ArrayList<Order> orders = new ArrayList<Order>();
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
-			ResultSet resultSet = statement.executeQuery("select * from orders");
+				Config.username, Config.password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("select * from orders")) {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				int customerID = resultSet.getInt("customer_id");
@@ -102,9 +104,10 @@ public class OrderDao implements Dao<Order> {
 	public ArrayList<Order> readRecords(int rID) {
 		ArrayList<Order> orders = new ArrayList<Order>();
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
-			ResultSet resultSet = statement
-					.executeQuery("select * from orders where " + OrderDao.searchID + " = " + rID);
+				Config.username, Config.password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement
+						.executeQuery("select * from orders where " + OrderDao.searchID + " = " + rID)) {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				int customerID = resultSet.getInt("customer_id");
@@ -126,10 +129,11 @@ public class OrderDao implements Dao<Order> {
 	public void update(Order r) {
 		double total = 0;
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
-			ResultSet resultSet = statement.executeQuery(
-					"select sum(quantity * item_value) from (select quantity, item_value, order_id from items join item_orders on items.id = item_orders.item_id) as item_quantity where order_id = "
-							+ r.getId());
+				Config.username, Config.password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(
+						"select sum(quantity * item_value) from (select quantity, item_value, order_id from items join item_orders on items.id = item_orders.item_id) as item_quantity where order_id = "
+								+ r.getId())) {
 			while (resultSet.next()) {
 				total = resultSet.getDouble("sum(quantity * item_value)");
 			}
