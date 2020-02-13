@@ -6,7 +6,6 @@ package com.qa.im.sqldatatypes;
  * @author Admin
  *
  */
-
 public class ItemOrder {
 	private int id;
 	private int itemID;
