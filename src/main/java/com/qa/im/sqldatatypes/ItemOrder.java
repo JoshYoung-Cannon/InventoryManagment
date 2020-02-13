@@ -89,35 +89,4 @@ public class ItemOrder {
 		this.quantity = quantity;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		result = prime * result + itemID;
-		result = prime * result + orderID;
-		result = prime * result + quantity;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ItemOrder other = (ItemOrder) obj;
-		if (id != other.id)
-			return false;
-		if (itemID != other.itemID)
-			return false;
-		if (orderID != other.orderID)
-			return false;
-		if (quantity != other.quantity)
-			return false;
-		return true;
-	}
-
 }

@@ -62,35 +62,4 @@ public class Order {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + customer_id;
-		result = prime * result + id;
-		long temp;
-		temp = Double.doubleToLongBits(total);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Order other = (Order) obj;
-		if (customer_id != other.customer_id)
-			return false;
-		if (id != other.id)
-			return false;
-		if (Double.doubleToLongBits(total) != Double.doubleToLongBits(other.total))
-			return false;
-		return true;
-	}
-
 }
