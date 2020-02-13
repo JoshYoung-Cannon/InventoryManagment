@@ -64,13 +64,13 @@ public class OrderDao implements Dao<Order> {
 	 * Create a new Order record
 	 */
 	public void create(Order r) {
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("insert into orders(customer_id) values(" + r.getCustomer_id() + ")");
 			Runner.LOGGER.info("Order added");
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not add: Customer " + r.getCustomer_id() + " to Orders table");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not add: Customer " + r.getCustomer_id() + " to Orders table");
+			Runner.LOGGER.error(e);
 		}
 	}
 
@@ -78,8 +78,8 @@ public class OrderDao implements Dao<Order> {
 	 * Copy the entire Orders table into a ArrayList
 	 */
 	public ArrayList<Order> readAll() {
-		ArrayList<Order> orders = new ArrayList<Order>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		ArrayList<Order> orders = new ArrayList<>();
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from orders")) {
@@ -91,8 +91,8 @@ public class OrderDao implements Dao<Order> {
 				orders.add(order);
 			}
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not read Customers table");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not read Orders table");
+			Runner.LOGGER.error(e);
 		}
 		return orders;
 	}
@@ -102,8 +102,8 @@ public class OrderDao implements Dao<Order> {
 	 * ArrayList
 	 */
 	public ArrayList<Order> readRecords(int rID) {
-		ArrayList<Order> orders = new ArrayList<Order>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		ArrayList<Order> orders = new ArrayList<>();
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement
@@ -116,8 +116,8 @@ public class OrderDao implements Dao<Order> {
 				orders.add(order);
 			}
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not read Customers table");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not read Customers table");
+			Runner.LOGGER.error(e);
 		}
 		return orders;
 	}
@@ -128,7 +128,7 @@ public class OrderDao implements Dao<Order> {
 	 */
 	public void update(Order r) {
 		double total = 0;
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(
@@ -145,12 +145,12 @@ public class OrderDao implements Dao<Order> {
 			try {
 				statement.executeUpdate("update orders set total = " + r.getTotal() + " where id = " + r.getId());
 			} catch (Exception e) {
-				Runner.LOGGER.info("Error could not update Order total");
-				Runner.LOGGER.info(e);
+				Runner.LOGGER.error("Error could not update Order total");
+				Runner.LOGGER.error(e);
 			}
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not read Item / Item Orders join");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not read Item / Item Orders join");
+			Runner.LOGGER.error(e);
 		}
 	}
 
@@ -158,13 +158,13 @@ public class OrderDao implements Dao<Order> {
 	 * Delete a record from the Orders table
 	 */
 	public void delete(int id) {
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("delete from orders where id = " + id);
 			Runner.LOGGER.info("Order deleted");
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not delete order record");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not delete Order record");
+			Runner.LOGGER.error(e);
 		}
 	}
 }

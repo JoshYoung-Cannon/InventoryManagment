@@ -38,7 +38,7 @@ public class ItemServices {
 	 * Displays the Item table
 	 */
 	public void viewAll() {
-		ArrayList<Item> items = new ArrayList<Item>();
+		ArrayList<Item> items = new ArrayList<>();
 		items = dao.readAll();
 		for (Item i : items) {
 			Runner.LOGGER.info(i.getId() + ": " + i.getName() + " £" + String.format("%.2f", i.getValue()));
@@ -51,7 +51,7 @@ public class ItemServices {
 	 * @return
 	 */
 	public boolean findRecord(int recordID) {
-		ArrayList<Item> items = new ArrayList<Item>();
+		ArrayList<Item> items = new ArrayList<>();
 		items = dao.readRecords(recordID);
 		boolean itemsFound = false;
 		if (items.size() > 0) {

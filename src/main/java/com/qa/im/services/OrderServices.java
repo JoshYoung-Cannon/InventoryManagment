@@ -45,7 +45,7 @@ public class OrderServices {
 	 * Finds and displays all Order records
 	 */
 	public void viewAll() {
-		ArrayList<Order> orders = new ArrayList<Order>();
+		ArrayList<Order> orders = new ArrayList<>();
 		orders = dao.readAll();
 		if (orders.size() > 0) {
 			for (Order i : orders) {
@@ -65,7 +65,7 @@ public class OrderServices {
 	 * @return
 	 */
 	public ArrayList<Order> findRecord(int recordID) {
-		ArrayList<Order> orders = new ArrayList<Order>();
+		ArrayList<Order> orders = new ArrayList<>();
 		orders = dao.readRecords(recordID);
 		if (orders.size() > 0) {
 			for (Order i : orders) {
@@ -83,7 +83,7 @@ public class OrderServices {
 	 * also remove any empty orders
 	 */
 	public void calculateCost() {
-		ArrayList<Order> orders = new ArrayList<Order>();
+		ArrayList<Order> orders = new ArrayList<>();
 		orders = dao.readAll();
 		for (Order i : orders) {
 			dao.update(i);
@@ -117,7 +117,7 @@ public class OrderServices {
 	 */
 	public void deleteOrder(int id) {
 		ItemOrderServices itemOrderServices = new ItemOrderServices();
-		ArrayList<Order> orders = new ArrayList<Order>();
+		ArrayList<Order> orders = new ArrayList<>();
 		dao.setSearchID(OrderSearchTypes.CUSTOMER.getSearchType());
 		orders = findRecord(id);
 		for (Order i : orders) {

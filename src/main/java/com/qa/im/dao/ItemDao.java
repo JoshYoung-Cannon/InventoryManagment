@@ -22,14 +22,14 @@ public class ItemDao implements Dao<Item> {
 	 * Create a new Item record
 	 */
 	public void create(Item r) {
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			statement.executeUpdate(
 					"insert into items(item_name, item_value) values('" + r.getName() + "', " + r.getValue() + ")");
 			Runner.LOGGER.info("Added item: " + r.getName() + " £" + r.getValue());
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not add: " + r.getName());
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not add: " + r.getName());
+			Runner.LOGGER.error(e);
 		}
 
 	}
@@ -38,8 +38,8 @@ public class ItemDao implements Dao<Item> {
 	 * Copy the entire Items table into a ArrayList
 	 */
 	public ArrayList<Item> readAll() {
-		ArrayList<Item> items = new ArrayList<Item>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		ArrayList<Item> items = new ArrayList<>();
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from items")) {
@@ -51,8 +51,8 @@ public class ItemDao implements Dao<Item> {
 				items.add(item);
 			}
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not read Items table");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not read Items table");
+			Runner.LOGGER.error(e);
 		}
 
 		return items;
@@ -63,8 +63,8 @@ public class ItemDao implements Dao<Item> {
 	 * ArrayList
 	 */
 	public ArrayList<Item> readRecords(int rID) {
-		ArrayList<Item> items = new ArrayList<Item>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		ArrayList<Item> items = new ArrayList<>();
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from items where id = " + rID)) {
@@ -76,8 +76,8 @@ public class ItemDao implements Dao<Item> {
 				items.add(item);
 			}
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not read Customers table");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not read Items table");
+			Runner.LOGGER.error(e);
 		}
 
 		return items;
@@ -87,14 +87,14 @@ public class ItemDao implements Dao<Item> {
 	 * Update the Item name and value of a specific record
 	 */
 	public void update(Item r) {
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("update items set item_name = '" + r.getName() + "', item_value = " + r.getValue()
 					+ " where id = " + r.getId());
 			Runner.LOGGER.info("Updated item: " + r.getId() + " to: " + r.getName() + " £" + r.getValue());
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not update Customer record");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not update Item record");
+			Runner.LOGGER.error(e);
 		}
 
 	}
@@ -103,13 +103,13 @@ public class ItemDao implements Dao<Item> {
 	 * Delete a record from the Items table
 	 */
 	public void delete(int id) {
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("delete from items where id = " + id);
 			Runner.LOGGER.info("Item deleted");
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not delete item record");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not delete Item record");
+			Runner.LOGGER.error(e);
 		}
 
 	}

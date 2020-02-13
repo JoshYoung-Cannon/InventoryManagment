@@ -70,7 +70,7 @@ public class ItemOrderServices {
 	 * Displays the itemOrder table
 	 */
 	public void viewAll() {
-		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
+		ArrayList<ItemOrder> itemOrders = new ArrayList<>();
 		itemOrders = dao.readAll();
 		for (ItemOrder i : itemOrders) {
 			Runner.LOGGER.info("id: " + i.getId() + " item_id: " + i.getItemID() + " order_id:  " + i.getOrderID() + " quantity: " + i.getQuantity());
@@ -84,7 +84,7 @@ public class ItemOrderServices {
 	 * @return
 	 */
 	public ArrayList<ItemOrder> findRecord(int recordID) {
-		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
+		ArrayList<ItemOrder> itemOrders = new ArrayList<>();
 		itemOrders = dao.readRecords(recordID);
 		if (itemOrders.size() > 0) {
 			for (ItemOrder i : itemOrders) {
@@ -135,7 +135,7 @@ public class ItemOrderServices {
 	 * @param fieldName
 	 */
 	public void deleteItemOrderByForiegnKey(int foriegnID, ItemOrderSearchTypes fieldName) {
-		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
+		ArrayList<ItemOrder> itemOrders = new ArrayList<>();
 		dao.setSearchID(fieldName.getSearchType());
 		itemOrders = findRecord(foriegnID);
 		for (ItemOrder i : itemOrders) {

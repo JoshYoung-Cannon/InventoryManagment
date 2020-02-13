@@ -38,7 +38,7 @@ public class CustomerServices {
 	 * Displays the Customer table
 	 */
 	public void viewAll() {
-		ArrayList<Customer> customers = new ArrayList<Customer>();
+		ArrayList<Customer> customers = new ArrayList<>();
 		customers = dao.readAll();
 		for (Customer i : customers) {
 			Runner.LOGGER.info(i.getId() + ": " + i.getSurname() + ", " + i.getForname());
@@ -51,7 +51,7 @@ public class CustomerServices {
 	 * @return
 	 */
 	public boolean findRecord(int recordID) {
-		ArrayList<Customer> customers = new ArrayList<Customer>();
+		ArrayList<Customer> customers = new ArrayList<>();
 		customers = dao.readRecords(recordID);
 		boolean customersFound = false;
 		if (customers.size() > 0) {

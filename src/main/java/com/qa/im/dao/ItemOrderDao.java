@@ -36,15 +36,15 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	 * Create a new Item Order record
 	 */
 	public void create(ItemOrder r) {
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("insert into item_orders(item_id, order_id, quantity) values(" + r.getItemID()
 					+ ", " + r.getOrderID() + ", " + r.getQuantity() + ")");
 			Runner.LOGGER.info("Created Item Order: item_id: " + r.getItemID() + " order_id:  " + r.getOrderID()
 					+ " quantity: " + r.getQuantity());
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not add: item " + r.getItemID() + " to order " + r.getOrderID());
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not add: item " + r.getItemID() + " to order " + r.getOrderID());
+			Runner.LOGGER.error(e);
 		}
 
 	}
@@ -53,8 +53,8 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	 * Copy the entire Item Orders table into a ArrayList
 	 */
 	public ArrayList<ItemOrder> readAll() {
-		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		ArrayList<ItemOrder> itemOrders = new ArrayList<>();
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from item_orders")) {
@@ -67,8 +67,8 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 				itemOrders.add(itemOrder);
 			}
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not read ItemOrders table");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not read Item Orders table");
+			Runner.LOGGER.error(e);
 		}
 
 		return itemOrders;
@@ -79,12 +79,12 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	 * into a ArrayList
 	 */
 	public ArrayList<ItemOrder> readRecords(int rID) {
-		ArrayList<ItemOrder> itemOrders = new ArrayList<ItemOrder>();
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		ArrayList<ItemOrder> itemOrders = new ArrayList<>();
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement
-						.executeQuery("select * from item_orders where " + ItemOrderDao.searchID + " = " + rID)) {
+						.executeQuery("select * from Item Orders where " + ItemOrderDao.searchID + " = " + rID)) {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				int itemID = resultSet.getInt("item_id");
@@ -94,8 +94,8 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 				itemOrders.add(itemOrder);
 			}
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not read ItemOrders table");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not read Item Orders table");
+			Runner.LOGGER.error(e);
 		}
 
 		return itemOrders;
@@ -105,15 +105,15 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	 * Update the quantity value of a specific record
 	 */
 	public void update(ItemOrder r) {
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			statement
 					.executeUpdate("update item_orders set quantity = " + r.getQuantity() + " where id = " + r.getId());
 			Runner.LOGGER.info("Updated Item Order: " + r.getId() + " To item_id: " + r.getItemID() + " order_id:  "
 					+ r.getOrderID() + " quantity: " + r.getQuantity());
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not update item_order record: " + r.getId());
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not update Item Order record: " + r.getId());
+			Runner.LOGGER.error(e);
 		}
 
 	}
@@ -122,13 +122,13 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	 * Delete a record from the Item Orders table
 	 */
 	public void delete(int id) {
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql:35.246.120.12/inventory_db",
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
 				Config.username, Config.password); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("delete from item_orders where id = " + id);
 			Runner.LOGGER.info("Deleted Item Order");
 		} catch (Exception e) {
-			Runner.LOGGER.info("Error could not delete Item Order record");
-			Runner.LOGGER.info(e);
+			Runner.LOGGER.error("Error could not delete Item Order record");
+			Runner.LOGGER.error(e);
 		}
 
 	}
