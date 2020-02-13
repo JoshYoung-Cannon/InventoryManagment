@@ -21,6 +21,22 @@ public class CustomerServices {
 
 	private CustomerDao dao = new CustomerDao();
 
+	public int getFirstNameMaxLength() {
+		return firstNameMaxLength;
+	}
+
+	public void setFirstNameMaxLength(int firstNameMaxLength) {
+		this.firstNameMaxLength = firstNameMaxLength;
+	}
+
+	public int getLastNameMaxLength() {
+		return lastNameMaxLength;
+	}
+
+	public void setLastNameMaxLength(int lastNameMaxLength) {
+		this.lastNameMaxLength = lastNameMaxLength;
+	}
+
 	/**
 	 * Asks for the new Customers name and adds it to the Customers table
 	 */

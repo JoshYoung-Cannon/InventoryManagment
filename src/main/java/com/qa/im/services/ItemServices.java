@@ -23,6 +23,22 @@ public class ItemServices {
 
 	private ItemDao dao = new ItemDao();
 
+	public int getItemNameMaxLength() {
+		return itemNameMaxLength;
+	}
+
+	public void setItemNameMaxLength(int itemNameMaxLength) {
+		this.itemNameMaxLength = itemNameMaxLength;
+	}
+
+	public double getMaxValue() {
+		return maxValue;
+	}
+
+	public void setMaxValue(double maxValue) {
+		this.maxValue = maxValue;
+	}
+
 	/**
 	 * Asks for the new Items name and value then adds it to the Items table
 	 */
