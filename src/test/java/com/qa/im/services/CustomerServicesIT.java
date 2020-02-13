@@ -86,7 +86,8 @@ public class CustomerServicesIT {
 		Mockito.doReturn(id).when(customerServices).getIdInput();
 		Mockito.doReturn(true).when(customerServices).findRecord(id);
 		Customer customer = new Customer(id, firstName, lastName);
-		//Mockito.verify(dao, Mockito.times(1)).update(customer);
+		customerServices.update();
+		Mockito.verify(dao, Mockito.times(1)).update(customer);
 	}
 	
 	@Test
