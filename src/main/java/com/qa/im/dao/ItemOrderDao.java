@@ -37,7 +37,7 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	 */
 	public void create(ItemOrder r) {
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
+				Config.getUsername(), Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("insert into item_orders(item_id, order_id, quantity) values(" + r.getItemID()
 					+ ", " + r.getOrderID() + ", " + r.getQuantity() + ")");
 			Runner.LOGGER.info("Created Item Order: item_id: " + r.getItemID() + " order_id:  " + r.getOrderID()
@@ -55,7 +55,7 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	public ArrayList<ItemOrder> readAll() {
 		ArrayList<ItemOrder> itemOrders = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password);
+				Config.getUsername(), Config.getPassword());
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from item_orders")) {
 			while (resultSet.next()) {
@@ -81,7 +81,7 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	public ArrayList<ItemOrder> readRecords(int rID) {
 		ArrayList<ItemOrder> itemOrders = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password);
+				Config.getUsername(), Config.getPassword());
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement
 						.executeQuery("select * from Item Orders where " + ItemOrderDao.searchID + " = " + rID)) {
@@ -106,7 +106,7 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	 */
 	public void update(ItemOrder r) {
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
+				Config.getUsername(), Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement
 					.executeUpdate("update item_orders set quantity = " + r.getQuantity() + " where id = " + r.getId());
 			Runner.LOGGER.info("Updated Item Order: " + r.getId() + " To item_id: " + r.getItemID() + " order_id:  "
@@ -123,7 +123,7 @@ public class ItemOrderDao implements Dao<ItemOrder> {
 	 */
 	public void delete(int id) {
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
+				Config.getUsername(), Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("delete from item_orders where id = " + id);
 			Runner.LOGGER.info("Deleted Item Order");
 		} catch (Exception e) {

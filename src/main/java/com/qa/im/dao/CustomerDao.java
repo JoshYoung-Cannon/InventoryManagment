@@ -3,7 +3,6 @@ package com.qa.im.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -23,8 +22,8 @@ public class CustomerDao implements Dao<Customer> {
 	 * Create a new Customer record
 	 */
 	public void create(Customer r) {
-		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.username,
-				Config.password);
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.getUsername(),
+				Config.getPassword());
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate(
 					"insert into customers(customer_name) values('" + r.getSurname() + ", " + r.getForname() + "')");
@@ -40,8 +39,8 @@ public class CustomerDao implements Dao<Customer> {
 	 */
 	public ArrayList<Customer> readAll() {
 		ArrayList<Customer> customers = new ArrayList<>();
-		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.username,
-				Config.password);
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.getUsername(),
+				Config.getPassword());
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from customers")) {
 			while (resultSet.next()) {
@@ -64,8 +63,8 @@ public class CustomerDao implements Dao<Customer> {
 	 */
 	public ArrayList<Customer> readRecords(int rID) {
 		ArrayList<Customer> customers = new ArrayList<>();
-		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.username,
-				Config.password);
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.getUsername(),
+				Config.getPassword());
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from customers where id = " + rID)) {
 			while (resultSet.next()) {
@@ -86,8 +85,8 @@ public class CustomerDao implements Dao<Customer> {
 	 * Update the Customer name of a specific record
 	 */
 	public void update(Customer r) {
-		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.username,
-				Config.password); Statement statement = connection.createStatement()) {
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.getUsername(),
+				Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("update customers set customer_name = '" + r.getSurname() + ", " + r.getForname()
 					+ "' where id = " + r.getId());
 			Runner.LOGGER.info("Updated customer: " + r.getId() + " to: " + r.getSurname() + ", " + r.getForname());
@@ -102,8 +101,8 @@ public class CustomerDao implements Dao<Customer> {
 	 * Delete a record from the Customers table
 	 */
 	public void delete(int id) {
-		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.username,
-				Config.password); Statement statement = connection.createStatement()) {
+		try (Connection connection = DriverManager.getConnection(Config.databaseConnection, Config.getUsername(),
+				Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("delete from customers where id = " + id);
 			Runner.LOGGER.info("Customer deleted");
 		} catch (Exception e) {

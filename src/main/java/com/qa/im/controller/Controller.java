@@ -28,9 +28,9 @@ public class Controller {
 		OrderServices order = new OrderServices();
 		ItemOrderServices itemOrder = new ItemOrderServices();
 		Runner.LOGGER.info("Enter the inventory_db username:");
-		Config.username = Utils.logInput("Username (hint root)");
+		Config.setUsername(Utils.logInput("Username (hint root)"));
 		Runner.LOGGER.info("Enter the inventory_db password:");
-		Config.password = Utils.logInput("Password");
+		Config.setPassword(Utils.logInput("Password"));
 		while (running) {
 			String tableChoice = null;
 			while (tableChoice == null) {

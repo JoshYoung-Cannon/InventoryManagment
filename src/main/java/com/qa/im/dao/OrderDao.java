@@ -65,7 +65,7 @@ public class OrderDao implements Dao<Order> {
 	 */
 	public void create(Order r) {
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
+				Config.getUsername(), Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("insert into orders(customer_id) values(" + r.getCustomer_id() + ")");
 			Runner.LOGGER.info("Order added");
 		} catch (Exception e) {
@@ -80,7 +80,7 @@ public class OrderDao implements Dao<Order> {
 	public ArrayList<Order> readAll() {
 		ArrayList<Order> orders = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password);
+				Config.getUsername(), Config.getPassword());
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from orders")) {
 			while (resultSet.next()) {
@@ -104,7 +104,7 @@ public class OrderDao implements Dao<Order> {
 	public ArrayList<Order> readRecords(int rID) {
 		ArrayList<Order> orders = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password);
+				Config.getUsername(), Config.getPassword());
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement
 						.executeQuery("select * from orders where " + OrderDao.searchID + " = " + rID)) {
@@ -129,7 +129,7 @@ public class OrderDao implements Dao<Order> {
 	public void update(Order r) {
 		double total = 0;
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password);
+				Config.getUsername(), Config.getPassword());
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(
 						"select sum(quantity * item_value) from (select quantity, item_value, order_id from items join item_orders on items.id = item_orders.item_id) as item_quantity where order_id = "
@@ -159,7 +159,7 @@ public class OrderDao implements Dao<Order> {
 	 */
 	public void delete(int id) {
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
+				Config.getUsername(), Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("delete from orders where id = " + id);
 			Runner.LOGGER.info("Order deleted");
 		} catch (Exception e) {

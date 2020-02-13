@@ -23,7 +23,7 @@ public class ItemDao implements Dao<Item> {
 	 */
 	public void create(Item r) {
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
+				Config.getUsername(), Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement.executeUpdate(
 					"insert into items(item_name, item_value) values('" + r.getName() + "', " + r.getValue() + ")");
 			Runner.LOGGER.info("Added item: " + r.getName() + " £" + r.getValue());
@@ -40,7 +40,7 @@ public class ItemDao implements Dao<Item> {
 	public ArrayList<Item> readAll() {
 		ArrayList<Item> items = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password);
+				Config.getUsername(), Config.getPassword());
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from items")) {
 			while (resultSet.next()) {
@@ -65,7 +65,7 @@ public class ItemDao implements Dao<Item> {
 	public ArrayList<Item> readRecords(int rID) {
 		ArrayList<Item> items = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password);
+				Config.getUsername(), Config.getPassword());
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from items where id = " + rID)) {
 			while (resultSet.next()) {
@@ -88,7 +88,7 @@ public class ItemDao implements Dao<Item> {
 	 */
 	public void update(Item r) {
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
+				Config.getUsername(), Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("update items set item_name = '" + r.getName() + "', item_value = " + r.getValue()
 					+ " where id = " + r.getId());
 			Runner.LOGGER.info("Updated item: " + r.getId() + " to: " + r.getName() + " £" + r.getValue());
@@ -104,7 +104,7 @@ public class ItemDao implements Dao<Item> {
 	 */
 	public void delete(int id) {
 		try (Connection connection = DriverManager.getConnection(Config.databaseConnection,
-				Config.username, Config.password); Statement statement = connection.createStatement()) {
+				Config.getUsername(), Config.getPassword()); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("delete from items where id = " + id);
 			Runner.LOGGER.info("Item deleted");
 		} catch (Exception e) {
