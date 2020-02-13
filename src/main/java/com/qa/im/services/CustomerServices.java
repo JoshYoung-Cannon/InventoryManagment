@@ -37,14 +37,22 @@ public class CustomerServices {
 		this.lastNameMaxLength = lastNameMaxLength;
 	}
 
+	public int getIdInput() {
+		return Utils.idInput();
+	}
+	
+	public String getStrInput(int charLimit, String inputName) {
+		return Utils.strInput(charLimit, inputName);
+	}
+	
 	/**
 	 * Asks for the new Customers name and adds it to the Customers table
 	 */
 	public void add() {
 		Runner.LOGGER.info("Please enter a frist name:");
-		String firstName = Utils.strInput(firstNameMaxLength, NameTypes.FORENAME.getNameType());
+		String firstName = getStrInput(firstNameMaxLength, NameTypes.FORENAME.getNameType());
 		Runner.LOGGER.info("Please enter a last name:");
-		String lastName = Utils.strInput(lastNameMaxLength, NameTypes.SURNAME.getNameType());
+		String lastName = getStrInput(lastNameMaxLength, NameTypes.SURNAME.getNameType());
 		Customer customer = new Customer(firstName, lastName);
 		dao.create(customer);
 
@@ -88,17 +96,17 @@ public class CustomerServices {
 	public void update() {
 		Customer customer = new Customer();
 		Runner.LOGGER.info("Please enter the ID of the Customer you want to update:");
-		customer.setId(Utils.idInput());
+		customer.setId(getIdInput());
 		Runner.LOGGER.info("Update Customer: ");
 		while (findRecord(customer.getId()) == false) {
 			Runner.LOGGER.info("Please enter the ID of the Customer you want to update:");
-			customer.setId(Utils.idInput());
+			customer.setId(getIdInput());
 			Runner.LOGGER.info("Update Customer: ");
 		}
 		Runner.LOGGER.info("Please enter a frist name:");
-		String firstName = Utils.strInput(firstNameMaxLength, NameTypes.FORENAME.getNameType());
+		String firstName = getStrInput(firstNameMaxLength, NameTypes.FORENAME.getNameType());
 		Runner.LOGGER.info("Please enter a last name:");
-		String lastName = Utils.strInput(lastNameMaxLength, NameTypes.SURNAME.getNameType());
+		String lastName = getStrInput(lastNameMaxLength, NameTypes.SURNAME.getNameType());
 		customer.setForname(firstName);
 		customer.setSurname(lastName);
 		dao.update(customer);
@@ -111,10 +119,10 @@ public class CustomerServices {
 		OrderServices orderServices = new OrderServices();
 		Customer customer = new Customer();
 		Runner.LOGGER.info("Please enter the ID of the Customer you want to delete:");
-		customer.setId(Utils.idInput());
+		customer.setId(getIdInput());
 		while (findRecord(customer.getId()) == false) {
 			Runner.LOGGER.info("Please enter the ID of the Customer you want to delete:");
-			customer.setId(Utils.idInput());
+			customer.setId(getIdInput());
 		}
 		orderServices.deleteOrder(customer.getId());
 		dao.delete(customer.getId());
