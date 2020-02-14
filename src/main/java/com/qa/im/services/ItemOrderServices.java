@@ -21,12 +21,12 @@ import com.qa.im.utils.Utils;
  */
 public class ItemOrderServices {
 	private ItemOrderDao dao = new ItemOrderDao();
-	private OrderDao orderDao = new OrderDao();
 	
 	/**
 	 * Link an item to an order and save the quantity desired
 	 */
 	public void addItemOrder() {
+		OrderDao orderDao = new OrderDao();
 		ItemOrder itemOrder = new ItemOrder();
 		OrderServices order = new OrderServices();
 		ItemServices item = new ItemServices();

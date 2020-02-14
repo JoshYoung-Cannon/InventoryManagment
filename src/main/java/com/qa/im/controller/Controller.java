@@ -18,15 +18,16 @@ import com.qa.im.utils.Utils;
  */
 public class Controller {
 
+	private CustomerServices customer = new CustomerServices();
+	private ItemServices item = new ItemServices();
+	private OrderServices order = new OrderServices();
+	private ItemOrderServices itemOrder = new ItemOrderServices();
+	
 	/**
 	 * run() is the system startup
 	 */
 	public void run() {
 		boolean running = true;
-		CustomerServices customer = new CustomerServices();
-		ItemServices item = new ItemServices();
-		OrderServices order = new OrderServices();
-		ItemOrderServices itemOrder = new ItemOrderServices();
 		Runner.LOGGER.info("Enter the inventory_db username:");
 		Config.setUsername(Utils.logInput("Username (hint root)"));
 		Runner.LOGGER.info("Enter the inventory_db password:");
